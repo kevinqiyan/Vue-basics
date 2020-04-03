@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test">
+        <p v-if = 'ok'>hellow</p>
+        <p v-else>hellow kevin</p>
+
+        <p v-show = 'ok'>黛西</p>
+        <p v-show = '!ok'>楠楠</p>
+
+        <button @click = ' ok = !ok'>TEST OK?</button>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script> Vue.productionTip = false</script>
+<script>
+
+    new Vue({
+        el:'#test',
+        data(){
+            return{
+                ok:true
+            }
+        }
+
+    })
+
+    
+</script>
+</html>

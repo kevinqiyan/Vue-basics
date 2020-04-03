@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染</title>
+</head>
+<body>
+    <div id="demo">
+        <h1>v-fo列表渲染</h1>
+        <ul>
+            <li v-for = '(item,index) in person' :key = (item.id)>
+                {{item.id}} -- {{item.name}} -- {{item.age}} --- 
+                <!-- <button @click = 'dele(item)' > 删除</button> -->
+                <button @click = 'deleP(index)'>删除</button>
+                <button @click = 'addP(index,{id:Date.now(),name:"kevin",age:18})'>更新</button>
+            </li>
+        </ul>
+      
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#demo',
+       data:{
+           person:[
+               {id:1,name:'tom',age:10},
+               {id:2,name:'to',age:12},
+               {id:3,name:'t',age:19},
+               {id:4,name:'tm',age:17},
+               {id:5,name:'om',age:13},
+           ]
+       },
+       methods:{
+           //删除 - 方法一
+        // dele(item){
+        //     this.person.splice(item,1)
+        // }
+
+        //删除 - 方法二
+        deleP(index){
+            this.person.splice(index,1)
+        },
+
+        addP(index,add){
+            this.person.splice(index,1,add)
+        }
+       }
+    })
+</script>
+</html>
