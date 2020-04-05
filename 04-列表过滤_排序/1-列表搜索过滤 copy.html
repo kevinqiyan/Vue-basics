@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test1">
+        <input type="text" v-model = 'search'>
+        <ul>
+            <li v-for = '(p,index) in newP' :key = 'p.id'>
+                {{p.id}} --- {{p.name}} --- {{p.age}}
+            </li>
+            <!-- <li v-for = '(p,index) in newP' :key = 'p.id'>
+                {{p.id}} -- {{p.name}} -- {{p.age}}
+            </li> -->
+        </ul>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#test1',
+        data(){
+            return{
+                search : '',
+                person:[
+               {id:1,name:'tom',age:10},
+               {id:2,name:'to',age:12},
+               {id:3,name:'t',age:19},
+               {id:4,name:'tm',age:17},
+               {id:5,name:'om',age:13},
+                ]
+            }
+        },
+        computed:{
+            newP(){
+                const {search,person} = this
+                const arr =  person.filter((p,index)=>p.name.indexOf(search) !== -1)
+                return arr
+        
+            }
+        }
+
+    })
+</script>
+</html>

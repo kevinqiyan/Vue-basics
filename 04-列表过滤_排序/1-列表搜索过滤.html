@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索</title>
+</head>
+<body>
+    <div id="demo">
+        <input type="text" v-model = "searchName">
+        <ul>    
+            <li v-for = '(item,index) in newPerson' :key = 'item.id'>
+                {{item.id}} -- {{item.name}} -- {{item.age}}
+            </li>
+        </ul>
+    </div>
+    
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#demo',
+        data(){
+            return{
+                searchName :'',
+                person:[
+               {id:1,name:'tom',age:10},
+               {id:2,name:'to',age:12},
+               {id:3,name:'t',age:19},
+               {id:4,name:'tm',age:17},
+               {id:5,name:'om',age:13},
+                ]
+            }
+        },
+        computed:{
+            newPerson(){
+
+                const {searchName,person} = this
+                const arr = person.filter(
+                    (item,index)=> item.name.indexOf(searchName) !== -1)
+                return arr
+            }
+    
+        }
+    })
+
+</script>
+</html>
