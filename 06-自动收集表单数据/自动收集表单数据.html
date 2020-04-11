@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动收集表单数据</title>
+</head>
+<body>
+    <div id="test">
+        <span>用户名</span>
+        <input type="username" v-model = 'user.username'><br>
+
+        <span>密码</span>
+        <input type="password" v-model = 'user.password'><br>
+
+
+        <span>性别</span>
+        <input type="radio" id="female" v-model = "user.sex" value="female">
+        <label for="female">男</label>
+        <input type="radio" id="male" v-model = "user.sex" value="male">
+        <label for="female">女</label><br>
+
+
+        <span>爱好</span>
+        <input type="checkbox" id="song" v-model = "user.likes" value="song">
+        <label for="song">唱歌</label>
+        <input type="checkbox" id="pingp" v-model = "user.likes" value="pingp">
+        <label for="pingp">乒乓</label>
+        <input type="checkbox" id="play" v-model = "user.likes" value="play">
+        <label for="play">玩</label><br>
+
+
+        <span>城市</span>
+        <select>
+            <option value="">等待选择</option>
+            <option :value="city.id" v-for = "city in city" :key = "city.id">{{city.name}}</option>
+        </select><br>
+
+
+        <span>介绍</span>
+        <textarea rows="10" v-model = 'text'>
+        </textarea>
+        <button @click = 'clear'>清除</button>
+        <br>
+        <button type="submit" @click = 'down'>注册</button>
+        
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#test',
+        data(){
+            return{
+                user:{
+                    username:'',
+                    password:'',
+                    sex:'',//femail 男 mail 女
+                    likes:[],
+                },
+                city:[
+                        {id:1,name:'北京'},
+                        {id:2,name:'上海'},
+                        {id:3,name:'山西'}
+                ],
+                text:''
+            }
+        },
+        methods:{
+            down(){
+                const user = {
+
+                }
+                alert('提交信息' + JSON.stringify(this.user))
+            },
+            clear(){
+                this.text = ''
+            }
+        }
+    })
+</script>
+</html>

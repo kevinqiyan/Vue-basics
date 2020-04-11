@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件处理</title>
+</head>
+<body>
+    <div id="demo">
+        <h1>绑定监听</h1>
+        <button @click = ' test1("kevin")'>test1</button>
+        <button @click = ' test2("kevin",$event)'>test1</button>
+        <h1>事件修饰符</h1>
+        <!-- <a href="http://www.27k.cc" @click.prevent= ' Moved '>Move</a> -->
+        <a href="http://www.27k.cc" @click= ' Moved '>Move</a>
+        <h1>按键修饰符</h1>
+        <!-- 绑定监听事件，利用keyCode -->
+        <input type="text" @keyup.13 = 'down' v-model = 'msg'>
+        <p>{{msg}}</p>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#demo',
+        data:{
+            msg:''
+        },
+        methods:{
+            test1(name){
+              alert(name)  
+            },
+            test2(name,e){
+              alert(name +  '-----' + event.target.innerHTML)  
+            },
+            Moved(){
+                alert('点击了链接')
+            },
+            down(){
+                alert(this.msg)
+            }
+        }
+    })
+</script>
+</html>
