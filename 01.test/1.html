@@ -39,17 +39,26 @@
 
 // myObject.func()
 
-    console.log(b);
-    if(!(b in window)){
-      var b =1
-    }
-    console.log(b);
+//     console.log(b);
+//     if(!(b in window)){
+//       var b =1
+//     }
+//     console.log(b);
 
-    console.log(d);
-    if(!d){
-      var d=1
-    }
-    console.log(d);
+//     console.log(d);
+//     if(!d){
+//       var d=1
+//     }
+//     console.log(d);
+
+function getname(){
+    return this.name
+}
+var a ={name:'kevin'}
+var name = getname(a)
+
+console.log(name);
+
 
 </script>
 </html>
