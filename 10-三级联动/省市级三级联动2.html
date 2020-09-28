@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    省：<select class="sheng">
+    <option>
+        -请选择-
+    </option>
+</select>
+    市：<select class="shi">
+    <option>
+        -请选择-
+    </option>
+</select>
+    区：<select class="qu">
+    <option>
+        -请选择-
+    </option>
+</select>
+</div>
+<script>
+    var city = [
+        {
+            "id": 10001,
+            "name": "陕西省",
+            "child": [
+                {
+                    "id": 100011,
+                    "name": "西安市",
+                    "child": [
+                        {
+                            "id": 100011,
+                            "name": "高新区"
+                        },
+                        {
+                            "id": 100011,
+                            "name": "未央区"
+                        }
+                    ]
+                },
+                {
+                    "id": 100012,
+                    "name": "宝鸡市",
+                    "child": [
+                        {
+                            "id": 100011,
+                            "name": "高新区"
+                        },
+                        {
+                            "id": 100011,
+                            "name": "成仓区"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 10002,
+            "name": "甘肃省",
+            "child": [
+                {
+                    "id": 100021,
+                    "name": "兰州市",
+                    "child": [
+                        {
+                            "id": 100021,
+                            "name": "兰州区1"
+                        },
+                        {
+                            "id": 100021,
+                            "name": "兰州区2"
+                        }
+                    ]
+                },
+                {
+                    "id": 100022,
+                    "name": "酒泉市",
+                    "child": [
+                        {
+                            "id": 100021,
+                            "name": "酒泉区1"
+                        },
+                        {
+                            "id": 100021,
+                            "name": "酒泉区2"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+    var sheng = document.getElementsByClassName("sheng")[0];
+    var shi = document.getElementsByClassName("shi")[0];
+    var qu = document.getElementsByClassName("qu")[0];
+    var nowShengIndex = 0;
+    for(var i=0;i<city.length;i++){
+        var optEle = new Option(city[i].name,i);
+        console.log(optEle.innerHTML);
+        sheng.appendChild(optEle)
+    }
+    sheng.onchange=function(){
+        shi.options.length = 1;
+        qu.options.length = 1;
+        //this.value可取到当前所选值对应的索引2
+      for(var i=0;i<city[this.value].child.length;i++){
+          var optEle = new Option(city[this.value].child[i].name,i);
+          shi.appendChild(optEle)
+      }
+        nowShengIndex = this.value;
+
+    };
+    shi.onchange=function () {
+        qu.options.length = 1;
+        console.log(qu);
+        for(var i=0;i<city[nowShengIndex].child[this.value].child.length;i++){
+            var optEle = new Option(city[nowShengIndex].child[this.value].child[i].name,i);
+            qu.appendChild(optEle)
+        }
+    }
+</script>
+</body>
+</html>
