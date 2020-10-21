@@ -5,21 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>列表渲染</title>
 </head>
+
 <body>
     <div id="demo">
         <h1>v-fo列表渲染</h1>
         <ul>
-            <li v-for = '(item,index) in person' :key = (item.id)>
+            <li v-for = '(item,index) in person' :key = (item.id) v-show = "item.isShow = true">
+            <!-- <li v-for = '(item,index) in person' :key = (item.id) :class="activeIndex !== -1?active:''"> -->
                 {{item.id}} -- {{item.name}} -- {{item.age}} --- 
                 <!-- <button @click = 'dele(item)' > 删除</button> -->
                 <button @click = 'deleP(index)'>删除</button>
                 <button @click = 'addP(index,{id:Date.now(),name:"kevin",age:18})'>更新</button>
+                <button @click = 'show(item,index)'>测试index</button>
             </li>
         </ul>
-      
     </div>
 </body>
 <script src="../js/vue.js"></script>
+
 <script>
     new Vue({
         el:'#demo',
@@ -30,7 +33,10 @@
                {id:3,name:'t',age:19},
                {id:4,name:'tm',age:17},
                {id:5,name:'om',age:13},
-           ]
+           ],
+           activeIndex:-1,
+        //    isShow:true,
+           active:'active'
        },
        methods:{
            //删除 - 方法一
@@ -45,8 +51,28 @@
 
         addP(index,add){
             this.person.splice(index,1,add)
+        },
+        show(item,index){
+            console.log('点击的index --- ',index,item);
+            //this.activeIndex = this.activeIndex == index ? !index :index
+            // this.activeIndex = index
+            // console.log(index);
+            // this.activeIndex = index
+            item.isShow = false
+            console.log(item.isShow);
         }
-       }
+       },
+
     })
 </script>
+<style>
+    .active{
+        display: none;
+        background-color: #bbffcc;
+    }
+    .a{
+        color: red;
+        background-color: #ffffaa;
+    }
+</style>
 </html>
