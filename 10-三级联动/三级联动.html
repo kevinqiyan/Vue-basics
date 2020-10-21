@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrp">
+        <!-- 下拉菜单 -->
+        <el-dropdown>
+            <span class="el-dropdown-link">
+              下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>黄金糕</el-dropdown-item>
+              <el-dropdown-item>狮子头</el-dropdown-item>
+              <el-dropdown-item>螺蛳粉</el-dropdown-item>
+              <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+              <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        <!-- input输入框 一级 -->
+        <el-select v-model="select" slot="prepend" placeholder="请选择">
+            <el-option label="餐厅名1" value="1"></el-option>
+            <el-option label="订单号1" value="2"></el-option>
+            <el-option label="用户电话1" value="3"></el-option>
+        </el-select>
+        <!-- input输入框 二级 -->
+        <el-select v-model="add" slot="prepend" placeholder="请选择">
+            <el-option label="餐厅名2" value="1"></el-option>
+            <el-option label="订单号2" value="2"></el-option>
+            <el-option label="用户电话2" value="3"></el-option>
+        </el-select>
+        <!-- input输入框 三级 -->
+        <el-select v-model="add2" slot="prepend" placeholder="请选择">
+            <el-option label="餐厅名3" value="1"></el-option>
+            <el-option label="订单号3" value="2"></el-option>
+            <el-option label="用户电话3" value="3"></el-option>
+        </el-select>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+new Vue({
+    data() {
+        return {
+            select:'',
+            add:'',
+            add2:''
+        }
+    },
+    methods: {
+        
+    },
+}).$mount('#wrp')
+</script>
+<style>
+    #wrp{
+        background-color: cornsilk;
+    }
+    .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+    }
+    .el-icon-arrow-down {
+    font-size: 12px;
+    }
+</style>
+</html>

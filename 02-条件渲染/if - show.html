@@ -3,211 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"> 
-    <title>Document</title>
+    <title>if-show</title>
 </head>
 <body>
-    <div id="test">
-        <!-- 第一个swiper -->
-        <div v-if = 'ok'>
-            <div id="box">
-
-                <div class="swiper-container" ref="hhhh">
-                    <div class="swiper-wrapper">
-        
-                        <div class="swiper-slide">
-                            <img src="./images/5.png" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/1.png" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/2.jpg" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/5.png" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/4.jpg" alt="">
-                        </div>
-                    </div>
-        
-        
-                    <!-- 如果需要分页器 -->
-                    <!-- <div class="swiper-pagination"></div> -->
-                    <!-- 如果需要导航按钮 -->
-                    <!-- 如果需要滚动条 -->
-                    <!-- <div class="swiper-scrollbar"></div> -->
-                </div>
-                <div class="swiper-button-prev k_btn swiper-button-#999999"></div>
-                <div class="swiper-button-next k_btn"></div>
-        
-            </div>
-
-        </div>
-        <!-- 第二个swiper -->
-        <div v-show='!ok'>
-            <div id="box">
-
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-        
-                        <div class="swiper-slide">
-                            <img src="./images/1.png" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/2.png" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/3.jpg" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/5.png" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/4.jpg" alt="">
-                        </div>
-                    </div>
-        
-        
-                    <!-- 如果需要分页器 -->
-                    <!-- <div class="swiper-pagination"></div> -->
-                    <!-- 如果需要导航按钮 -->
-                    <!-- 如果需要滚动条 -->
-                    <!-- <div class="swiper-scrollbar"></div> -->
-                </div>
-                <div class="swiper-button-prev k_btn swiper-button-#999999"></div>
-                <div class="swiper-button-next k_btn"></div>
-        
-            </div>
-        </div>
-
-        <!-- <p v-show = 'ok'>黛西</p>
-        <p v-show = '!ok'>楠楠</p> -->
-
-        <button @click = 'ok = !ok'>TEST OK?</button>
+    <div id="box">
+        <button v-show = 'isShow' @click = 'test'> 测试一下 </button>
     </div>
 </body>
 <script src="../js/vue.js"></script>
-<script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
-<script> Vue.productionTip = false</script>
 <script>
-
 new Vue({
-    el:'#test',
-    data(){
-        return{
-            ok:true
+    data() {
+        return {
+            isShow:1
         }
     },
-    mounted() {
-        new Swiper('hhhh .swiper-container',{
-            loop:true,
-            // autoplay:true,
-            slidesPerView : 3,
-            centeredSlides : true,
-            // centeredSlidesBounds: true,
-            navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-            },
-            
-        })
+    methods: {
+        test(){
+            console.log(this.isShow);
+            this.isShow = ''
+        }
     },
-    updated() {
-        new Swiper('#box .swiper-container',{
-            loop:true,
-            // autoplay:true,
-            slidesPerView : 3,
-            centeredSlides : true,
-            // centeredSlidesBounds: true,
-            navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-            },
-            
-        })
-    },
-
-})
-
-
-
-
-    
+}).$mount('#box')
 </script>
-<style>
-    #box{
-    width: 376px;
-    height: 144px;
-    text-align: center;
-    align-items: center;
-    position: relative;
-    /* --swiper-theme-color: #999999;设置Swiper风格 */
-    --swiper-navigation-color: #999999;/* 单独设置按钮颜色 */
-    --swiper-navigation-size: 18px;/* 设置按钮大小 */
-    outline: none;
-}
-.swiper-container{
-    width: 304px;
-    height: 120px;
-    
-}
-/* .swiper-wrapper{
-    width: 100%;
-    height: 100%;
-    background-color: #999999;
-    box-shadow: steelblue;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-} */
-.swiper-slide{
-    /* width: 120px;
-    height: 120px; */
-    width: 80px;
-    height: 80px;
-    text-align: center;
-    /* font-size: 18px; */
-    background: #fff;
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    transition: 300ms;
-    transform: scale(1);
-}
-.swiper-slide img{
-    /* width: 120px;
-    height: 90px; */
-    width: 80px;
-    height: 60px;
-    /* transform: scale(calc(8/12)); */
-}
-.swiper-slide-next>img{
-    display: inline-block;
-    width: 80px !important;
-}
-.swiper-slide-active{
-    transform: scale(1 + calc(8/12));
-    width: 120px !important;
-    height: 120px !important;
-}
-.swiper-button-prev,.swiper-button-next,.k_btn{
-    width: 6px;
-    height: 20px;
-    position: absolute;
-    top: 50%;
-    background-color:orange;
-}
-</style>
 </html>

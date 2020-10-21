@@ -7,9 +7,15 @@
 </head>
 <body>
     <div id="demo">
-        <input type="text" v-model = "searchName">
+        <input type="text" v-model = "searchName"><input type="submit" @click = 'sub'>
         <ul>    
             <li v-for = '(item,index) in newPerson' :key = 'item.id'>
+                {{item.id}} -- {{item.name}} -- {{item.age}}
+            </li>
+        </ul>
+        <input type="text" v-model = "searchId">
+        <ul>
+            <li v-for= '(item,index) in newId' :key='index' >
                 {{item.id}} -- {{item.name}} -- {{item.age}}
             </li>
         </ul>
@@ -23,7 +29,15 @@
         data(){
             return{
                 searchName :'',
+                searchId:'',
                 person:[
+               {id:1,name:'tom',age:10},
+               {id:2,name:'to',age:12},
+               {id:3,name:'t',age:19},
+               {id:4,name:'tm',age:17},
+               {id:5,name:'om',age:13},
+                ],
+                person2:[
                {id:1,name:'tom',age:10},
                {id:2,name:'to',age:12},
                {id:3,name:'t',age:19},
@@ -32,15 +46,26 @@
                 ]
             }
         },
+        methods: {
+            sub(){
+                console.log('1111');
+            }
+        },
         computed:{
             newPerson(){
-
                 const {searchName,person} = this
                 const arr = person.filter(
-                    (item,index)=> item.name.indexOf(searchName) !== -1)
+                    (item,index)=> item.name.indexOf(searchName) !== -1
+                )
                 return arr
+            },
+            newId(){
+                const {searchId,person2} = this
+                const arrId = person2.filter(
+                    (item,index)=> item.id>searchId
+                )
+                return arrId
             }
-    
         }
     })
 
