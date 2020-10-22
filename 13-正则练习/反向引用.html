@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反向引用</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var str = "Is is the cost of of gasoline going up up";
+    var patt1 = /\b([a-z]+) \1\b/ig;
+    document.write(str.match(patt1));
+    var test = 'http://www.baidu.com';
+    var pat = /(\w+):\/\/([^/:]+)/;
+    var arr = test.match(pat)
+    for (let index = 0; index < arr.length; index++) {
+        document.write("<br>")
+        document.write(arr[index])     
+    }
+    document.write("<br>")
+    document.write(arr[0])
+</script>
+</html>
