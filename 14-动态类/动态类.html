@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态类</title>
+</head>
+<body>
+    <div id="wrap">
+        <ul class="content" v-for= '(item,index) in list' :key='index' >
+            <li @click = 'changeColor(item,index)' :class="active == index ? them:''">{{item.name}}</li>
+        </ul>
+        <div class="boot" v-show = 'false'>
+            <p>您的名字是:{{fullName}}</p>
+            <span>姓:</span><input type="text" v-model = 'firstInput'>
+            <span>名:</span><input type="text" v-model = 'lastInput'>
+        </div>
+
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        data() {
+            return {
+                list:[
+                    {name:1,id:1},
+                    {name:2,id:2},
+                    {name:3,id:3},
+                    {name:4,id:4},
+                ],
+                them:'list',
+                isShow:false,
+                active:'0',
+                firstInput:'',
+                lastInput:''
+            }
+        },
+        methods: {
+            changeColor(item,index){
+                console.log(index);
+                this.active = index
+                // item.name = '点击了'
+            }
+        },
+        computed: {
+            fullName:function(){
+                return this.firstInput +' '+ this.lastInput
+            }
+        },
+    }).$mount('#wrap')
+</script>
+<style>
+    *{
+        list-style: none;
+    }
+    li{
+        background-color: #c5cac6;
+    }
+    /* li:hover{
+        background-color:rgba(65,112,249,0.4);
+    } */
+    .list{
+        background-color:red;
+    }
+</style>
+</html>
