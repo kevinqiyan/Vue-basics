@@ -8,8 +8,14 @@
 <body>
     <div id="wrap">
         <ul class="content" v-for= '(item,index) in list' :key='index' >
-            <li @click = 'changeColor(index)' :class="active == index ? them:''">{{item.name}}</li>
+            <li @click = 'changeColor(item,index)' :class="active == index ? them:''">{{item.name}}</li>
         </ul>
+        <div class="boot" v-show = 'false'>
+            <p>您的名字是:{{fullName}}</p>
+            <span>姓:</span><input type="text" v-model = 'firstInput'>
+            <span>名:</span><input type="text" v-model = 'lastInput'>
+        </div>
+
     </div>
 </body>
 <script src="../js/vue.js"></script>
@@ -25,18 +31,22 @@
                 ],
                 them:'list',
                 isShow:false,
-                active:'0'
+                active:'0',
+                firstInput:'',
+                lastInput:''
             }
         },
         methods: {
-            changeColor(index){
+            changeColor(item,index){
                 console.log(index);
                 this.active = index
-                
+                // item.name = '点击了'
             }
         },
         computed: {
-            
+            fullName:function(){
+                return this.firstInput +' '+ this.lastInput
+            }
         },
     }).$mount('#wrap')
 </script>
@@ -47,9 +57,9 @@
     li{
         background-color: #c5cac6;
     }
-    li:hover{
+    /* li:hover{
         background-color:rgba(65,112,249,0.4);
-    }
+    } */
     .list{
         background-color:red;
     }
