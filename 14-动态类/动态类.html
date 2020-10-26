@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态类</title>
+</head>
+<body>
+    <div id="wrap">
+        <ul class="content" v-for= '(item,index) in list' :key='index' >
+            <li @click = 'changeColor(index)' :class="active == index ? them:''">{{item.name}}</li>
+        </ul>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        data() {
+            return {
+                list:[
+                    {name:1,id:1},
+                    {name:2,id:2},
+                    {name:3,id:3},
+                    {name:4,id:4},
+                ],
+                them:'list',
+                isShow:false,
+                active:'0'
+            }
+        },
+        methods: {
+            changeColor(index){
+                console.log(index);
+                this.active = index
+                
+            }
+        },
+        computed: {
+            
+        },
+    }).$mount('#wrap')
+</script>
+<style>
+    *{
+        list-style: none;
+    }
+    li{
+        background-color: #c5cac6;
+    }
+    li:hover{
+        background-color:rgba(65,112,249,0.4);
+    }
+    .list{
+        background-color:red;
+    }
+</style>
+</html>
