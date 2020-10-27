@@ -39,6 +39,7 @@
                   <!-- //下面的小圆点 -->
                 <li v-for="(dot, i) in sliders" :key="i" 
                 :class="{dotted: i === (currentIndex-1)}"
+                @click='jump(i+1)'
                 >
                 </li>
               </ul>
@@ -70,6 +71,12 @@
                 if (this.distance > -600) this.distance = -2400
                 if (this.currentIndex > 4) this.currentIndex = 1
                 if (this.currentIndex < 1) this.currentIndex = 4
+            },
+            // 点击小圆点切换
+            jump(index){
+                const direction = index - this.currentIndex >= 0 ? -1 : 1  //获取滑动方向 
+                const offset = Math.abs(index - this.currentIndex) * 600   //获取滑动距离
+                this.move(offset, direction)
             }
         },
         computed: {
@@ -162,5 +169,6 @@ img{
 .dots .dotted{
   background-color:orange;
 }
+
 </style>
 </html>
