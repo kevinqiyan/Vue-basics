@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <title>element表格</title>
+</head>
+<body>
+    <div id="box">
+        <div id="content">
+            <el-table :data="tableData" border style="width: 362px">
+                <el-table-column
+                prop="date"
+                label="日期"
+                width="180">
+                </el-table-column>
+                <el-table-column
+                prop="name"
+                label="姓名"
+                width="180">
+                </el-table-column>
+          </el-table>
+          <el-table :data="tableData" border style="width: 362px">
+            <el-table-column
+            prop="date"
+            label="日期"
+            width="180">
+            </el-table-column>
+            <el-table-column
+            prop="name"
+            label="姓名"
+            width="180">
+            </el-table-column>
+      </el-table>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el:'#box',
+        data() {
+            return {
+            tableData: [
+                {
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, 
+                {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1517 弄'
+                },
+                {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                },
+                {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1516 弄'
+                }
+            ]
+            }
+        },
+        methods: {
+            
+        },
+        computed: {
+            
+        },
+    })
+</script>
+<style>
+    #content{
+        width: 1000px;
+    }
+    .el-table el-table--fit el-table--border el-table--enable-row-hover el-table--enable-row-transition{
+        width: 498px;
+        float: left;
+    }
+    .el-table{
+        float: left;
+    }
+</style>
+</html>
