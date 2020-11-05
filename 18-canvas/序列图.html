@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>序列图</title>
+</head>
+<body>
+    <!-- <img id='imgT' src="../Static/timg.jpg" alt=""> -->
+    <canvas id="box" width="150" height="320"></canvas>
+    <button id="btn">清除定时器</button>
+    <button id="btn1">定时器</button>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script>
+    var box =  document.getElementById('box');
+    var ctx = box.getContext('2d');
+    var img = document.createElement('img')
+    var btn = document.getElementById('btn')
+    var btn1 = document.getElementById('btn1')
+    var nub = 1
+    btn.onclick = function(){
+        clearInterval(a)
+    }
+    btn1.onclick = function(){
+        clearInterval(a)
+        a = setInterval(test,100)
+    }
+    var a = setInterval(test,100)
+    function test(nub) {
+        this.nub++
+        if (this.nub>7) {
+            this.nub = 1
+        }
+        img.src = '../Static/'+this.nub+'.png'
+        img.onload=function(){
+            ctx.drawImage(img,20,20)
+        }
+    }
+</script>
+<style>
+    canvas{
+        background-color: #fff;
+    }
+</style>
+</html>
