@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div id="talk_con">
+    <div class="talk_con2">
+            <!-- 显示区域 -->
+            <div class="talk_show" id="words">
+                
+                <!-- 根据vue对象中的数组，遍历出对应的标签。 -->
+                <div v-for="i in arr" :class="i.person=='A'?'atalk':'btalk'">
+                    <p class="talk_time">
+                        <span>
+                            {{i.t}}
+                        </span>
+                       
+                    </p>
+                    <span class="talk_img" v-if="i.person=='A'"><img src="../Static/P00510-192230.jpg" alt=""></span>
+                    <span class="talk_person">{{ i.person }}说：{{ i.words }}</span>
+                    <span class="talk_img" v-if="i.person=='B'"><img src="../Static/P00420-160539.jpg" alt=""></span>
+                </div>
+            </div>
+
+            <!-- 发送内容区域 -->
+            <div class="talk_input">
+                <!-- 选项: 带有selected的选项,的value值和select标签共享 -->
+                <select class="whotalk" id="who" v-model='str1'>
+                    <option value="0">A说：</option>
+                    <option value="1">B说：</option>
+                </select>
+                <!-- 请输入内容 -->
+                <input type="text" class="talk_word" id="talkwords" v-model='str2' @keyup.enter='add_data()'>
+                <!-- 按钮 -->
+                <input type="button" value="发送" class="talk_sub" id="talksub" @click="add_data()">
+            </div>
+            <div class="feed_back"  @click='feed_back'>
+                <div class="feed_foot">
+                    <div>我要</div>
+                    <div>反馈</div>
+                </div>
+               
+            </div>
+    </div>
+</div>
+</body>
+<style type="text/css">
+    .talk_con1{
+        width:600px;
+        height:500px;
+        border:1px solid #666;
+        margin: 30px;
+        float: left;
+        background:#e98080;
+    }
+
+    .talk_con2{
+        width:600px;
+        height:500px;
+        border:1px solid #666;
+        margin: 30px;
+        float: right;
+        background:#7adbd3;
+        position: relative;
+    }
+    .talk_show{
+        width:580px;
+        height:420px;
+        border:1px solid #666;
+        background:#fff;
+        margin:10px auto 0;
+        overflow:auto;
+    }
+    .talk_input{
+        width:580px;
+        margin:10px auto 0;
+    }
+    .whotalk{
+        width:80px;
+        height:30px;
+        float:left;
+        outline:none;
+    }
+    .talk_word{
+        width:420px;
+        height:26px;
+        padding:0px;
+        float:left;
+        margin-left:10px;
+        outline:none;
+        text-indent:10px;
+    }        
+    .talk_sub{
+        width:56px;
+        height:30px;
+        float:left;
+        margin-left:10px;
+    }
+    .talk_time{
+        text-align: center;
+    }
+    .talk_time>span{
+        background-color: #CCCCCC;
+    }
+    .talk_img{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+    .talk_img>img{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+    .atalk{
+       margin:10px; 
+    }
+    .atalk .talk_person{
+        display:inline-block;
+        background:#0181cc;
+        border-radius:10px;
+        color:#fff;
+        padding:5px 10px;
+    }
+    .btalk{
+        margin:10px;
+        text-align:right;
+    }
+    .btalk .talk_person{
+        display:inline-block;
+        background:#ef8201;
+        border-radius:10px;
+        color:#fff;
+        padding:5px 10px;
+    }
+    .feed_back{
+        width: 50px;
+        height: 50px;
+        position: fixed;
+        top: 20%;
+        right:3%;
+        border-radius: 50%;
+        background-color: #169BD5;
+        opacity: 0.95;
+        text-align: center;
+        align-items: center;
+        font-size: 12px;
+        cursor: pointer;
+    }
+    .feed_foot{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+</style>
+<script src="../js/vue.js"></script>
+<script>
+    window.onload = function(){
+        // 上面定义变量和方法，标签上使用。
+        
+        // 1.创建Vue对象
+        var vm = new Vue({
+            // 2.获取标签
+            el: '#talk_con',
+            // 3.定义变量
+            data: {
+                arr:[
+                    {person: 'A', words: '吃饭了吗？'},
+                    {person: 'B', words: '还没呢，你呢？'},
+                ],
+                str1: '1',
+                str2: '',
+            },
+            // 4.定义方法
+            methods:{
+                add_data: function(){
+                    // bug: 内容不能为空。
+                    if(this.str2 == ''){
+                        alert('请输入内容...')
+                        return;
+                    }
+                    var p = this.str1=="0"?"A":"B";
+                    var dat1 = Date.now()
+                    var dat = this.format(dat1)
+                    var obj = {person: p, words: this.str2,t:dat}
+                    this.arr.push(obj)
+                    this.str2 = ''
+                },
+                format(data) {//时间戳转格式化日期 
+
+                    var timetype = new Date(data);//data
+                    // console.log(timetype, "时间戳处理")
+
+                    var y = timetype.getFullYear();
+
+                    var m = timetype.getMonth() + 1;
+
+                    var d = timetype.getDate();
+
+                    var h = timetype.getHours();
+
+                    var mm = timetype.getMinutes();
+
+                    return y + '/' + this.addZero(m) + '/' + this.addZero(d) +'  ' + this.addZero(h) + ':' + this.addZero(mm)
+                },
+                //时间小于10前面加 0
+                addZero(m) {
+                    return m < 10 ? '0' + m : m
+                },
+                feed_back(){
+                    alert('点击了-我要反馈')
+                }
+            },
+
+        })
+
+
+    }
+</script>
+</html>
