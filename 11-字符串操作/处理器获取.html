@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var inter = '11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz'
+    let cpu = '12th Gen Intel(R) Core(TM) i7-1265G7 @ 2.80GHz'
+    let t = /11th\sGen\sIntel®\sCore™\s([i|m]\d{1,2})\-([A-Za-z0-9]+)/
+    let te = /11th\sGen\sIntel\(R\)\sCore\(TM\)\s([i|m]\d{1,2})\-([A-Za-z0-9]+)\s@/
+    let tes = /Intel\(R\)\sCore\(TM\)\s([i|m]\d{1,2})\-([A-Za-z0-9]+)/
+    if (inter.match(tes)) {
+        console.log(inter.match(tes));
+        console.log(RegExp.$2,RegExp.$1);
+        if (RegExp.$2.substring(0,2) == 11) {
+            console.log(`第十一代 Intel®酷睿™ ${RegExp.$1}-${RegExp.$2}`);
+        }
+    }
+
+    if (cpu.indexOf("11th") === 0) {
+        if (cpu.match(/11th\sGen\sIntel\(R\)\sCore\(TM\)\s([i|m]\d{1,2})\-([A-Za-z0-9]+)\s@/)) {
+            console.log( `第11代Intel®酷睿™${RegExp.$1}-${RegExp.$2}`);
+        }
+    } else if(cpu.match(/Intel\(R\)\sCore\(TM\)\s([i|m]\d{1,2})\-([A-Za-z0-9]+)\s@/)){
+        if (RegExp.$2.substring(0,2) == 11) {
+            console.log( `第11代Intel®酷睿™${RegExp.$1}-${RegExp.$2}`);
+        }else{
+            console.log('error1');
+        }
+    }else{
+        console.log('error2');
+    }
+
+</script>
+</html>
