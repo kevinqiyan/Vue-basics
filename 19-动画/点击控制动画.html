@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击控制动画</title>
+</head>
+<style>
+      ul,li{
+        list-style: none;
+    }
+    #box{
+        width: 100%;
+    }
+    #list{
+        width: 100%;
+        height: 100px;
+    }
+    #listOne{
+        width: 300px;
+        height: 100px;
+        background-color: #bbffaa;
+        float: left;
+        text-align: center;
+        line-height: 100px;
+    }
+    .imgM{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+    .active{
+        animation: imgKey 1s linear infinite;
+    }
+    @keyframes imgKey {
+        0%{-webkit-transform:rotate(0deg);}
+        /* 50%{-webkit-transform:rotate(180deg);} */
+        100%{-webkit-transform:rotate(360deg);}
+    }
+    #listTwo{
+        width: 300px;
+        height: 100px;
+        background-color: blue;
+        float: left;
+        color: white;
+        line-height: 100px;
+        text-align: center;
+    }
+</style>
+<body>
+    <div id="box">
+        <ul id="list">
+            <li id="listOne" @click='move'>
+                <img :src="this.isMove ? '../Static/P00420-160539.jpg' : '../Static/P00510-192230.jpg' " class="imgM" :class = "this.isMove ? this.active : '' ">
+            </li>
+            <li id="listTwo">第二个</li>
+        </ul>
+    </div>
+</body>
+
+<script src="../js/vue.js">
+</script>
+<script >
+    new Vue({
+        el:'#box',
+        data() {
+            return {
+                active:'active',
+                isMove:false,
+            }
+        },
+        methods: {
+            move(){
+                this.isMove = !this.isMove
+            }
+        },
+    })
+</script>
+</html>
