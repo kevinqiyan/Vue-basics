@@ -15,7 +15,15 @@
             <span>姓:</span><input type="text" v-model = 'firstInput'>
             <span>名:</span><input type="text" v-model = 'lastInput'>
         </div>
-
+        <div id="box">
+            <div id="test"  @mouseenter='change' @mouseleave='change2'>
+                <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2501092530,1791050307&fm=26&gp=0.jpg" alt="">
+                <div id="test2" v-show="Show">
+                </div>
+            </div>
+        </div>
+      
+        
     </div>
 </body>
 <script src="../js/vue.js"></script>
@@ -33,7 +41,8 @@
                 isShow:false,
                 active:'0',
                 firstInput:'',
-                lastInput:''
+                lastInput:'',
+                Show:false
             }
         },
         methods: {
@@ -41,6 +50,12 @@
                 console.log(index);
                 this.active = index
                 // item.name = '点击了'
+            },
+            change(){
+                this.Show = true
+            },
+            change2(){
+                this.Show = false
             }
         },
         computed: {
@@ -51,6 +66,10 @@
     }).$mount('#wrap')
 </script>
 <style>
+    /* body,html{
+        background: rgba(0, 0, 0, 0.7);
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2), 0px 0px 7px 1px rgba(0, 0, 0, 0.2);
+    } */
     *{
         list-style: none;
     }
@@ -62,6 +81,32 @@
     } */
     .list{
         background-color:red;
+    }
+    #box{
+        width: 100%;
+        height:auto;
+        background: rgba(255, 255, 255, 0.12);
+        text-align: center;
+    }
+    #test{
+        width: 50%;
+        height: 100px; 
+        background:rgba(0, 0, 0, 0.4);
+        position: relative;
+    }
+    #test>img{
+        width: 100px;
+        height: 100px;
+    }
+    #test2{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100px;
+        z-index: -1;
+        /* background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #090909 100%); */
+        filter: blur(10px);
     }
 </style>
 </html>

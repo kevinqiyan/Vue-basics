@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rem</title>
+</head>
+<body>
+    <div id="box">
+        <div class="title"></div>
+        <div class="content"></div>
+        <div class="foot"></div>
+    </div>
+</body>
+<script>
+    window.onload = function(){
+        (function() {
+        var newRem = function() {
+            var html = document.documentElement;
+            html.style.fontSize = html.getBoundingClientRect().width / 16 + 'px';
+        };
+        window.addEventListener('resize', newRem, false);
+        newRem();
+    })();
+    }
+    
+</script>
+<style>
+    *{
+        margin: 0;
+        padding: 0px;
+    }
+    body{
+        font-size: 12px;
+        overflow: hidden;
+    }
+    #box{
+        width: 370px;
+        height:100vh;
+
+    }
+    .title{
+        width: 100%;
+        height:10%;
+        background-color: #bbffaa;
+    }
+    .content{
+        width: 100%;
+        height: 70%;
+        background-color: #ccddff;
+    }
+    .foot{
+        width: 100%;
+        height: 20%;
+        background-color: blue;
+    }
+</style>
+</html>
