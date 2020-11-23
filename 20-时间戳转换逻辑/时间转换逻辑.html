@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间转换</title>
+</head>
+
+<body>
+    <div id="box">
+        <p>{{time}}</p>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el: '#box',
+        data() {
+            return {
+                time:''
+            }
+        },
+        created() {
+            this.timer()
+        },
+        mounted() {
+
+            
+        },
+        methods: {
+            timer(){
+                this.clear()
+                this.times = setInterval(() => {
+                    var a = 1605585335359
+                    console.log(this.format(2,a));
+                    this.time = this.format(2,a)
+                }, 1000);
+            },
+            clear(){
+                clearInterval(this.times)
+            },
+            addZero(m) {
+                return m < 10 ? '0' + m : m
+            },
+            format(type, data) {//时间戳转格式化日期 
+                const timetype = new Date(data);//data
+                // console.log(timetype, "时间戳处理")
+
+                const y = timetype.getFullYear();
+
+                const m = timetype.getMonth() + 1;
+
+                const d = timetype.getDate();
+
+                const h = timetype.getHours();
+
+                const mm = timetype.getMinutes();
+
+                const ss = timetype.getSeconds();
+
+                // var s = timetype.getSeconds();
+                // this.currentTime = 
+                if (type == 1) {//其他时间
+                    return y + '/' + this.addZero(m) + '/' + this.addZero(d)
+                }
+                if (type == 2) {//昨天
+                    return '昨天' + ' ' + this.addZero(h) + ':' + this.addZero(mm)
+                }
+                if (type == 3) {//当天
+                    return this.addZero(h) + ':' + this.addZero(mm)
+                }
+                if (type == 4) {
+                    return h
+                }
+                if (type == 5) {
+                    return y + '-' + this.addZero(m) + '-' + this.addZero(d) + ' ' + this.addZero(h) + ':' + this.addZero(mm) + ':' + this.addZero(ss)
+                }
+                if (type == 6) {
+                    return this.addZero(ss)
+                }
+            },
+        },
+    })
+</script>
+
+</html>

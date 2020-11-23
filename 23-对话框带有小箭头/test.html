@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小箭头</title>
+</head>
+<body>
+    <div id="demo">
+        <div class="shixin"></div>
+        <div class="kongxin"></div>
+    </div>
+</body>
+<style>
+    #demo{
+        width:100px;
+        height:100px;
+        position:absolute;
+        top: 35%;
+        left:40%;   
+        border:2px solid red;
+        border-radius:8px;
+    }
+    .shixin{
+        width:0;
+        height:0;
+        border:10px solid transparent;
+        border-bottom-color: red;
+        position: relative;
+        top: -21%;
+        left:15%;
+    }
+    .kongxin{
+        width:0;
+        height:0;
+        border:10px solid transparent;
+        border-bottom-color:#fff;
+        position: relative;
+        top: -39%;
+        left:15%;
+    }
+</style>
+</html>
