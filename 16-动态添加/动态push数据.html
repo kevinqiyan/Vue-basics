@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态push数据</title>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#box',
+        data() {
+            return {
+                list:[
+                    {id:1}
+                ]
+            }
+        },
+    })
+</script>
+</html>
