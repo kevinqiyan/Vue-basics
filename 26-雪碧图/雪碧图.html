@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雪碧图练习</title>
+</head>
+<style>
+*{
+    margin:0;
+    padding: 0;
+}
+#wrap{
+    width: 100%;
+    height: 100%;
+}
+#content{
+    width: 400px;
+    height: 400px;
+}
+.img{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    background-image: url('https://img-blog.csdn.net/20180929185706323?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsbGVueWh5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70');
+    /* background-position: 300px -300px; */
+}
+</style>
+<body>
+    <div id="wrap">
+        <div id="content"> 
+            <div class="img" :style=`background-position:${dis}`>
+            </div>
+            <button @click="change">点击切换</button>
+        </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+new Vue({
+    el:'#wrap',
+    data() {
+        return {
+            a:"1",
+            b:"1",
+            dis:"0px 0px"
+        }
+    },
+    mounted() {
+        console.log(this.dis,this.a,this.b);
+    },
+    methods: {
+        change(){
+            this.dis = "-150px -300px"
+        }
+    },
+})
+</script>
+</html>

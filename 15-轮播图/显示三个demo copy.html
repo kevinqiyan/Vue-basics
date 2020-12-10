@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+</head>
+<body>
+    <div id="wrap">
+        <div id="slider">
+            <div class="window">
+              <ul class="container" :style="containerStyle"> 
+                <li v-for="(item, index) in sliders" :key="index">  
+                    <!-- //通过v-for渲染的需要展示的5张图 -->
+                  <img :src="item.img" alt="">
+                </li>
+              </ul>
+              <ul class="direction">
+                <li class="left" @click = 'move(225,1)' v-show="leftBtn">
+                    <!-- 左边箭头 -->
+                  <svg class="icon" width="30px" height="30.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M481.233 904c8.189 0 16.379-3.124 22.628-9.372 12.496-12.497 12.496-32.759 0-45.256L166.488 512l337.373-337.373c12.496-12.497 12.496-32.758 0-45.255-12.498-12.497-32.758-12.497-45.256 0l-360 360c-12.496 12.497-12.496 32.758 0 45.255l360 360c6.249 6.249 14.439 9.373 22.628 9.373z"  /></svg>          
+                </li>
+                <li class="right" @click = 'move(225, -1)' v-show="rightBtn">
+                    <!-- 右边箭头 -->
+                  <svg class="icon" width="30px" height="30.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M557.179 904c-8.189 0-16.379-3.124-22.628-9.372-12.496-12.497-12.496-32.759 0-45.256L871.924 512 534.551 174.627c-12.496-12.497-12.496-32.758 0-45.255 12.498-12.497 32.758-12.497 45.256 0l360 360c12.496 12.497 12.496 32.758 0 45.255l-360 360c-6.249 6.249-14.439 9.373-22.628 9.373z"  /></svg>          
+                </li>
+              </ul>
+            </div>
+          </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#wrap',
+        data() {
+            return {
+            sliders:[
+               {img:'../Static/P00420-160539.jpg'},
+               {img:'../Static/P00510-192230.jpg'},
+               {img:'../Static/P01013-124742.jpg'},
+               {img:'../Static/qqzone.jpg'},
+               {img:'../Static/1.png'},
+            ],
+            currentIndex:1,
+            distance:0,
+            leftBtn:false,
+            rightBtn:true
+          }
+        },
+        methods: {
+            move(offset, direction) {
+                direction === -1 ? this.currentIndex += offset/225 : this.currentIndex -= offset/225
+                this.distance = this.distance + offset * direction
+                let lgt = this.sliders.length
+                let of = lgt*225-675
+                console.log(lgt,of);
+                if (this.distance < -of) this.distance = -of
+                if (this.distance > 0) this.distance = 0
+                if(this.distance < 0) this.leftBtn = true,this.rightBtn = true
+                if(this.distance == -of) this.rightBtn = false
+                if(this.distance == 0) this.leftBtn = false
+            },
+        },
+        computed: {
+            containerStyle() {  //这里用了计算属性，用transform来移动整个图片列表
+            return {
+                    transition: `all 2s`,
+                    transform:`translate3d(${this.distance}px, 0, 0)`
+                }
+            }
+        },
+        watch: {
+            
+        },
+    })
+</script>
+<style scoped>
+*{
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+ol,ul{
+  list-style: none;
+}
+#slider{
+  text-align: center;
+}
+.window{
+  position:relative;
+  width:600px;
+  height:400px;
+  margin:0 auto;
+  overflow:hidden;
+  background-color: red;
+}
+.container{
+  display:flex;
+  position:absolute;
+}
+.container li {
+   /* margin-left: 37.5px; */
+   margin-right: 75px;
+}
+.container li img{
+    width:150px;
+    height:400px;
+}
+.left, .right{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:50px;
+  height:50px;
+  background-color:rgba(0,0,0,.3);
+  border-radius:50%;
+  cursor:pointer;
+}
+.left{
+  left:3%;
+  padding-left:12px;
+  padding-top:10px;
+}
+.right{
+  right:3%;
+  padding-right:12px;
+  padding-top:10px;
+}
+img{
+  user-select: none;
+}
+
+</style>
+</html>
