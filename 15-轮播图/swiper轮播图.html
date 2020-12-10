@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"> 
+    <title>swiper轮播图-再次尝试点击事件</title>
+</head>
+<style>
+    .swiper-container {
+        width: 600px;
+        height: 300px;
+    }
+    .swiper-slide{
+        text-align: center;
+        background-color: #bbffcc;
+        color: black;
+        font-size: 20px;
+        font-weight: 200;
+        line-height: 300px;
+    }
+</style>
+<body>
+    <div id="wrap">
+        <div id="content">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for= '(item,index) in swpList' :key='index' 
+                    @click='change(index)'
+                    >{{item.name}}</div>
+                    <!-- <div class="swiper-slide">Slide 2</div>
+                    <div class="swiper-slide">Slide 3</div> -->
+                </div>
+                
+            </div>
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
+<script>
+    new Vue({
+        el:"#wrap",
+        created() {
+            vm = this
+        },
+        data() {
+            return {
+                swpList:[
+                    {name:'Slide 1'},
+                    {name:'Slide 2'},
+                    {name:'Slide 3'}
+                ]
+            }
+        },
+        methods: {
+            change:function(index){
+                console.log(index);
+            }
+        },
+        mounted() {
+            new Swiper('.swiper-container', {
+                direction: 'horizontal', // 垂直切换选项
+                loop: true, // 循环模式选项
+
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+
+                // 如果需要前进后退按钮
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+                // 如果需要滚动条
+                scrollbar: {
+                    el: '.swiper-scrollbar',
+                },
+                on:{
+                    click:function(){
+                        const realIndex = this.realIndex
+                        vm.change(realIndex)
+                    }
+                }
+            })
+        },
+    })
+</script>
+</html>
