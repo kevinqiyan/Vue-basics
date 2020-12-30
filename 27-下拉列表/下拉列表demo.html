@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复选框demo练习</title>
+</head>
+<style>
+*{
+    margin: 0px;
+    padding: 0px;
+
+}
+ul,li{
+    list-style: none;
+}
+.active{
+    background-color: #bbffaa;
+}
+#wrap{
+    width: 344px;
+    height: 100vh;
+    /* background-color: #bbffaa; */
+}
+.ulList{
+    height: 100px;
+    overflow-y: scroll;
+}
+.ulList::-webkit-scrollbar{
+    width: 10px;
+    border-radius: 4px;
+    background-color: white;
+}
+.ulList::-webkit-scrollbar-thumb{
+    height: 50px;
+    background-color: #bbffaa;
+    border-radius: 4px;
+}
+.ulList::-webkit-scrollbar-button{
+    display: none;
+}
+.ulList li{
+    height: 20px;
+}
+.signImg{
+    width: 100%;
+    height: 200px;
+}
+.signImg>img{
+    width: 100%;
+    height: 200px;
+}
+</style>
+<body>
+    <div id="wrap">
+        <div id="content">
+            <div class="sign">
+                <div class="signImg">
+                    <img :src="signImg" alt="">
+                </div>
+                <p>{{text}}</p>
+                <button class="btn" @click="btnShow">button显示</button>
+                <ul v-show="listShow" class="ulList">
+                    <li v-for="(item, index) in signList" :key="index" 
+                    @click='getName(item,index)' 
+                    :class = 'active == index ? "active" :""'
+                    @mouseenter = 'enter(index)'
+                    @mouseleave = 'leave()'
+                    >{{item.name}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+new Vue({
+    el:'#wrap',
+    data() {
+        return {
+            text:'星座显示',
+            listShow:true,
+            active :-1,
+            signImg:'../Static/2.png',
+            signList:[
+                {name:'1'},
+                {name:'2'},
+                {name:'3'},
+                {name:'4'},
+                {name:'5'},
+                {name:'6'},
+                {name:'7'},
+                {name:'8'},
+                {name:'9'},
+                {name:'10'},
+                {name:'11'},
+                {name:'12'},
+            ]
+        }
+    },
+    methods: {
+        btnShow(){
+            this.listShow = !this.listShow
+        },
+        getName(item,index){
+            this.text = item.name
+            this.listShow = false
+            this.changeImg(index)
+        },
+        enter(index){
+            this.active = index
+        },
+        leave(){
+            this.active = -1
+        },
+        changeImg(index){
+            console.log('进行调用了',index);
+            switch (index) {
+                case 0:
+                    console.log(index,'第一个星座');
+                break;
+                case 1:
+                    console.log(index,'第二个星座');
+                    this.signImg = '../Static/1.png'
+                break;
+                case 2:
+                
+                break;
+                case 3:
+                
+                break;
+                case 4:
+                
+                break;
+                case 5:
+                
+                break;
+                case 6:
+                
+                break;
+                case 7:
+                
+                break;
+                case 8:
+                
+                break;
+                case 9:
+                
+                break;
+                case 10:
+                    
+                break;
+                case 11:
+                
+                break;
+
+                default:0
+                break;
+            }
+        }
+    },
+    mounted() {
+        
+    },
+})
+</script>
+</html>
