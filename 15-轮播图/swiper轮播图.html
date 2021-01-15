@@ -19,6 +19,16 @@
         font-weight: 200;
         line-height: 300px;
     }
+    #dele{
+        width: 100px;
+        height: 30px;
+        font-weight: 400;
+        background-color: #bbffaa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
 </style>
 <body>
     <div id="wrap">
@@ -26,7 +36,7 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for= '(item,index) in swpList' :key='index' 
-                    @click='change(index)'
+                    @click.once='change(index)'
                     >{{item.name}}</div>
                     <!-- <div class="swiper-slide">Slide 2</div>
                     <div class="swiper-slide">Slide 3</div> -->
@@ -36,6 +46,9 @@
             <!-- 如果需要导航按钮 -->
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
+        </div>
+        <div id="dele" @click='dele'>
+            删除
         </div>
     </div>
 </body>
@@ -52,20 +65,28 @@
                 swpList:[
                     {name:'Slide 1'},
                     {name:'Slide 2'},
-                    {name:'Slide 3'}
+                    {name:'Slide 3'},
+                    {name:'Slide 4'},
+                    {name:'Slide 5'},
+                    {name:'Slide 6'},
                 ]
             }
         },
         methods: {
             change:function(index){
+                event.stopImmediatePropagation();
                 console.log(index);
+            },
+            dele(){
+                this.swpList.split(0,1)
             }
         },
         mounted() {
             new Swiper('.swiper-container', {
                 direction: 'horizontal', // 垂直切换选项
-                loop: true, // 循环模式选项
-
+                loop: false, // 循环模式选项
+                slidesPerView: 3,
+                spaceBetween: 30,
                 // 如果需要分页器
                 pagination: {
                     el: '.swiper-pagination',
