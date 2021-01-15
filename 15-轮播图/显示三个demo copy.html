@@ -7,40 +7,22 @@
 </head>
 <body>
     <div id="wrap">
-
         <div id="slider">
             <div class="window">
               <ul class="container" :style="containerStyle"> 
-                   <!-- //注意这里的:style //这是图片列表，排成一排 -->
-                <li> 
-                     <!-- //列表最前面的辅助图，它和图5一样，用于无限滚动 -->
-                  <img :src="sliders[sliders.length - 1].img" alt="">
-                </li>
                 <li v-for="(item, index) in sliders" :key="index">  
                     <!-- //通过v-for渲染的需要展示的5张图 -->
                   <img :src="item.img" alt="">
                 </li>
-                <li>  
-                    <!-- 列表最后面的辅助图，它和图1一样，用于无限滚动 -->
-                  <img :src="sliders[0].img" alt="">
-                </li>
               </ul>
               <ul class="direction">
-                <li class="left" @click = 'move(600,1)'>
+                <li class="left" @click = 'move(225,1)' v-show="leftBtn">
                     <!-- 左边箭头 -->
                   <svg class="icon" width="30px" height="30.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M481.233 904c8.189 0 16.379-3.124 22.628-9.372 12.496-12.497 12.496-32.759 0-45.256L166.488 512l337.373-337.373c12.496-12.497 12.496-32.758 0-45.255-12.498-12.497-32.758-12.497-45.256 0l-360 360c-12.496 12.497-12.496 32.758 0 45.255l360 360c6.249 6.249 14.439 9.373 22.628 9.373z"  /></svg>          
                 </li>
-                <li class="right" @click = 'move(600, -1)'>
+                <li class="right" @click = 'move(225, -1)' v-show="rightBtn">
                     <!-- 右边箭头 -->
                   <svg class="icon" width="30px" height="30.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M557.179 904c-8.189 0-16.379-3.124-22.628-9.372-12.496-12.497-12.496-32.759 0-45.256L871.924 512 534.551 174.627c-12.496-12.497-12.496-32.758 0-45.255 12.498-12.497 32.758-12.497 45.256 0l360 360c12.496 12.497 12.496 32.758 0 45.255l-360 360c-6.249 6.249-14.439 9.373-22.628 9.373z"  /></svg>          
-                </li>
-              </ul>
-              <ul class="dots">  
-                  <!-- //下面的小圆点 -->
-                <li v-for="(dot, i) in sliders" :key="i" 
-                :class="{dotted: i === (currentIndex-1)}"
-                @click='jump(i+1)'
-                >
                 </li>
               </ul>
             </div>
@@ -58,32 +40,32 @@
                {img:'../Static/P00510-192230.jpg'},
                {img:'../Static/P01013-124742.jpg'},
                {img:'../Static/qqzone.jpg'},
+               {img:'../Static/1.png'},
             ],
             currentIndex:1,
-            distance:-600
-            }
+            distance:0,
+            leftBtn:false,
+            rightBtn:true
+          }
         },
         methods: {
             move(offset, direction) {
-                direction === -1 ? this.currentIndex += offset/600 : this.currentIndex -= offset/600
+                direction === -1 ? this.currentIndex += offset/225 : this.currentIndex -= offset/225
                 this.distance = this.distance + offset * direction
-                if (this.distance < -2400) this.distance = -3000
-                if (this.distance == -3000) this.distance = -600
-                if (this.distance > -600) this.distance = -2400
-                if (this.currentIndex > 4) this.currentIndex = 1
-                if (this.currentIndex < 1) this.currentIndex = 4
+                let lgt = this.sliders.length
+                let of = lgt*225-675
+                console.log(lgt,of);
+                if (this.distance < -of) this.distance = -of
+                if (this.distance > 0) this.distance = 0
+                if(this.distance < 0) this.leftBtn = true,this.rightBtn = true
+                if(this.distance == -of) this.rightBtn = false
+                if(this.distance == 0) this.leftBtn = false
             },
-            // 点击小圆点切换
-            jump(index){
-                const direction = index - this.currentIndex >= 0 ? -1 : 1  //获取滑动方向 
-                const offset = Math.abs(index - this.currentIndex) * 600   //获取滑动距离
-                this.move(offset, direction)
-            }
         },
         computed: {
             containerStyle() {  //这里用了计算属性，用transform来移动整个图片列表
             return {
-              // transition: `all 1s`,
+                    transition: `all 2s`,
                     transform:`translate3d(${this.distance}px, 0, 0)`
                 }
             }
@@ -91,15 +73,10 @@
         watch: {
             
         },
-        created() {
-            setInterval(()=>{
-                // this.move(600, -1)
-            },2000)
-        },
     })
 </script>
 <style scoped>
-    *{
+*{
   box-sizing: border-box;
   margin:0;
   padding:0;
@@ -116,17 +93,18 @@ ol,ul{
   height:400px;
   margin:0 auto;
   overflow:hidden;
+  background-color: red;
 }
 .container{
   display:flex;
   position:absolute;
 }
-/* .container li {
-    width:600px;
-    height:400px;
-} */
+.container li {
+   /* margin-left: 37.5px; */
+   margin-right: 75px;
+}
 .container li img{
-    width:600px;
+    width:150px;
     height:400px;
 }
 .left, .right{
@@ -151,25 +129,6 @@ ol,ul{
 }
 img{
   user-select: none;
-}
-.dots{
-    position:absolute;
-    bottom:10px;
-    left:50%;
-    transform:translateX(-50%);
-  }
-.dots li{
-  display:inline-block;
-  width:15px;
-  height:15px;
-  margin:0 3px;
-  border:1px solid white;
-  border-radius:50%;
-  background-color:#333;
-  cursor:pointer;
-}
-.dots .dotted{
-  background-color:orange;
 }
 
 </style>

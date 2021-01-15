@@ -17,6 +17,13 @@
         <!-- 绑定监听事件，利用keyCode -->
         <input type="text" @keyup.13 = 'down' v-model = 'msg'>
         <p>{{msg}}</p>
+
+        <!-- 阻止默认事件 -->
+        <div id="out" @click="out">
+            <div id="inner" @click="inner">
+
+            </div>
+        </div>
     </div>
 </body>
 <script src="../js/vue.js"></script>
@@ -38,8 +45,31 @@
             },
             down(){
                 alert(this.msg)
+            },
+            out(){
+                console.log('父元素点击了---out');
+            },
+            inner(){
+                console.log(event.target,'======',event.target);
+                event.stopPropagation();
+                    console.log('子元素---inner');
+                
+                
             }
         }
     })
 </script>
+<style>
+    #out{
+        width: 300px;
+        height: 300px;
+        border: 1px solid red;
+    }
+    #inner{
+        width: 150px;
+        height: 150px;
+        border: 1px solid blue;
+        margin: 0 auto;
+    }
+</style>
 </html>
