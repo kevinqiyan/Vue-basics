@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loading</title>
+</head>
+<style>
+*{
+    padding: 0;
+    margin: 0;
+}
+#box{
+    width: 100%;
+    height: 100%;
+}
+#top{
+    width: 400px;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+#top img{
+    width: 100%;
+    height: 100%;
+}
+.test{
+    margin-top: 20px;
+    width: 300px;
+    height: 200px;
+}
+.red{
+    background-color: red;
+}
+.green{
+    background-color: #bbffaa;
+}
+</style>
+<body>
+    <div id="box">
+        <div id="top">
+            <img src="../Static/32/big_loading.svg" alt="" v-if='loading'>
+            <img src="../Static//qqzone.jpg" alt="" v-else>
+        </div>
+        <div @click='btn1'>点击进行切换图片显示</div>
+        <br>
+        <div @click='btn2'>底部的进行切换显示</div>
+        <div class="test red" v-if='add'>
+
+        </div>
+        <div class="test green" v-else>
+
+        </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+new Vue({
+    el:'#box',
+    data() {
+        return {
+            loading:true,
+            add:true
+        }
+    },
+    created() {
+
+        if (document.readyState =='complete') {
+            console.log('页面已经全部加载完成');
+        }else{
+            console.log(document.readyState,'查看document的状态');
+        }
+        window.onload=()=>{
+            console.log('window进行执行了');
+            this.loading = false
+        }
+        document.onreadystatechange = ()=>{
+            this.init(document.readyState);
+        }
+
+    },
+    mounted() {
+
+    },
+    methods: {
+        init(path){
+            switch (path) {
+                case 'loading':
+                console.log('正在加载中');
+                break;
+                case 'interactive':
+                console.log('正在加载中DOM可访问');
+                break;
+                case 'complete':
+                console.log('已经全部加载完成');
+                break;
+            }
+        },
+        btn1(){
+            this.loading = !this.loading
+        },
+        btn2(){
+            console.log('btn2');
+            this.add = !this.add
+        }
+
+    },
+})
+</script>
+</html>
