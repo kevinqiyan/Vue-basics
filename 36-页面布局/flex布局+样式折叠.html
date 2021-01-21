@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>样式折叠</title>
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+ul,li{
+    list-style: none;
+}
+#flex{
+    width: 345px;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#content{
+    width: 345px;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+}
+header{
+    width: 345px;
+    height: 150px;
+    background-color: #bbffaa;
+}
+main{
+    width: 345px;
+    display: flex;
+    flex: 1;
+    background-color: rgb(86, 156, 214);
+}
+footer{
+    width: 345px;
+    /* height: 200px; */
+    /* background-color: orange; */
+}
+#footHide{
+    width: 345px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    background-color: orange;
+    cursor: pointer;
+}
+#footMain{
+    width: 345px;
+    height: 180px;
+    text-align: center;
+    line-height: 180px;
+    background-color: rgb(252, 85, 49);
+}
+</style>
+<body>
+    <div id="flex">
+        <div id="content">
+            <header></header>
+            <main></main>
+            <footer>
+                <div id="footHide" @click='hide'>隐藏</div>
+                <div id="footMain" v-show='footShow'>
+                    显示底部全部
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#flex',
+        data() {
+            return {
+                footShow:true
+            }
+        },
+        methods: {
+            hide(){
+                this.footShow = !this.footShow
+            }
+        },
+    })
+</script>
+</html>
