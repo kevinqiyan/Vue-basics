@@ -126,11 +126,11 @@
                     var eleTime = element.split(" ")
                     if (eleTime.length == 2 && eleTime[0].search("/") !=-1) {
                         // 判断是否是当天(同一天 ->显示时分秒)
-                    if (this.toTime == this.format(1,Date.parse(element))) {
-                        array[index].time = this.format(3,element)
-                    }else{ //不是同一天 ->显示年月日
-                        array[index].time = this.format(1,element)
-                    }
+                        if (this.toTime == this.format(1,Date.parse(element))) {
+                            array[index].time = this.format(3,element)
+                        }else{ //不是同一天 ->显示年月日
+                            array[index].time = this.format(1,element)
+                        }
                     }
                 }
             }
