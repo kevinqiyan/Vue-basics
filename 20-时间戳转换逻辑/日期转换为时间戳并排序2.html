@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日期转化为时间戳</title>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+
+<script>
+    new Vue({
+        el:"#box",
+        mounted() {
+            this.getLocalTime()
+            console.log(this.time,'数据是否转化');
+        },
+        data() {
+            return {
+                time:[
+                    {time:'2014-05-08 00:22:11'},
+                    {time:'2014-05-01 00:22:12'},
+                    {time:'2014-05-02 00:22:13'},
+                    {time:'2014-05-03 00:22:14'},
+                    {time:'2021-01-18 16:00:15'},
+                ],
+                toTime: '',
+                yesTime: '',
+                newHour: '',
+                newMoutes: '',
+                timeSecond: '',
+            }
+        },
+        methods: {
+            // 7. 综合调用
+            getLocalTime(){
+                this.currentTime()
+                this.timeChange(this.time)
+                this.time.sort(this.timeSort("time"))
+                this.setTime(this.time)
+            },
+            // 1. 先将日期转为时间戳
+            timeChange(array){
+                for (let index = 0; index < array.length; index++) {
+                    let element = array[index].time;
+                    element = new Date(element.replace(/-/g,'/')).getTime()
+                    array[index].time = element;
+                    // console.log(array[index].time,'查看parse',this.format(1,array[index].time));
+                }
+            },
+            // 2. 通过时间戳进行排序从近到远
+            timeSort(key){
+                return function(v1,v2){
+                    let v11 = v1.time;
+                    let v22 = v2.time;
+                    return v22-v11
+                }
+            },
+            // 3. 获取当前时间后期进行比对
+            currentTime(){
+                this.toTime = this.format(1, new Date().getTime())//今天
+                this.yesTime = this.format(1, (new Date().getTime() - 86400000))//昨天
+                this.newHour = this.format(4, new Date().getTime())
+                this.newMoutes = this.format(3, new Date().getTime())
+                this.timeSecond = this.format(6,new Date().getTime())//时分秒
+            },
+            // 4. 时间转化函数
+            format(type,data) {
+                const timetype = new Date(data); //data
+                const y = timetype.getFullYear();
+                const m = timetype.getMonth() + 1;
+                const d = timetype.getDate();
+                const h = timetype.getHours();
+                const mm = timetype.getMinutes();
+                const ss = timetype.getSeconds();
+                if (type == 1) {
+                    //其他时间
+                    return y + "/" + this.addZero(m) + "/" + this.addZero(d);
+                }
+                if (type == 2) {
+                    //昨天
+                    return "昨天" + " " + this.addZero(h) + ":" + this.addZero(mm);
+                }
+                if (type == 3) {
+                    //当天
+                    return this.addZero(h) + ":" + this.addZero(mm);
+                }
+                if (type == 4) {
+                    return h;
+                }
+                if (type == 5) {
+                    return (
+                        y +
+                        "-" +
+                        this.addZero(m) +
+                        "-" +
+                        this.addZero(d) +
+                        " " +
+                        this.addZero(h) +
+                        ":" +
+                        this.addZero(mm) +
+                        ":" +
+                        this.addZero(ss)
+                    );
+                }
+                if (type == 6) {
+                    return this.addZero(ss);
+                }
+                if (type == 7) {
+                    return y + "/" + this.addZero(m) + "/" + this.addZero(d) +' '+ this.addZero(h) +":"+this.addZero(mm)+":"+this.addZero(ss)
+                }
+            },
+            // 5. 小于10的添加前置0
+            addZero(m){
+                return m < 10 ? "0" + m : m;
+            },
+            // 6. 日期进行重新赋值
+            setTime(array){
+                for (let index = 0; index < array.length; index++) {
+                    var element = array[index].time
+                    element = this.format(7,element)
+                    var eleTime = element.split(" ")
+                    if (eleTime.length == 2 && eleTime[0].search("/") !=-1) {
+                        // 判断是否是当天(同一天 ->显示时分秒)
+                        if (this.toTime == this.format(1,Date.parse(element))) {
+                            array[index].time = this.format(3,element)
+                        }else{ //不是同一天 ->显示年月日
+                            array[index].time = this.format(1,element)
+                        }
+                    }
+                }
+            }
+        },
+    })
+</script>
+</html>
