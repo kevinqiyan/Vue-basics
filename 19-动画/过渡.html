@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过渡jquery</title>
+</head>
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+    .active{
+        left: 0px; 
+    }
+    .active2{
+        left: -100%;
+    }
+    #test{
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+    }
+    .content{
+        width: 345px;
+        height: 345px;
+        position: absolute;
+        /* left: -100%; */
+        transition: all 2s;
+    }
+    .content>img{
+        width: 345px;
+        height: 345px;
+    }
+    #btn{
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        border: 1px solid orange;
+        font-size: 10px;
+        position: absolute;
+        z-index: 2;
+    }
+</style>
+<body>
+    <div id="test">
+        <div class="content">
+            <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg&refer=http%3A%2F%2Fa0.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1615100938&t=9e4344e759bbf5f65cd4557bf0570d12" alt="">
+        </div>
+        <div id="btn">控制显示button</div>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script>
+    var a=1
+    window.onload = function(){
+        $('.content').addClass('active2')
+    }
+$('#btn').click(()=>{
+    a++
+    console.log('打印',a);
+    if (a%2 == 0) {
+        $('.content').removeClass('active2')
+        $('.content').addClass('active')
+    }else{
+        $('.content').removeClass('active')
+        $('.content').addClass('active2')
+    }
+    // a = a++
+})
+</script>
+</html>
