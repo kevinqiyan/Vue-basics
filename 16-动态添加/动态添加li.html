@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div id="test">
         <button @click='test'>点击测试</button>
         <p>文字{{textN - msg.length}}</p>
         <form>
-            <textarea 
-            v-model='msg' 
-            @blur='qwe' 
-            class="textC"
-            maxlength="100"
-            required
-            ></textarea>
+            <textarea v-model='msg' @blur='qwe' class="textC" maxlength="100" required></textarea>
             <input type="submit">
         </form>
         <div id="content">
             <ul :class="isShow ? listW : contListC">
-            <!-- <ul class="contList" > -->
+                <!-- <ul class="contList" > -->
                 <li v-for="(item, index) in this.contList" :key="index" class="contentLi">{{item.name}}</li>
             </ul>
         </div>
         <button @click='reduce' class="btn">{{textValue}}</button>
         <div id="testAddList">
             <ul class="testC">
-                <li v-for= '(item,index) in testList' :key='index' >{{item.key}}</li>
+                <li v-for='(item,index) in testList' :key='index'>{{item.key}}</li>
             </ul>
         </div>
         <div>
-            key<input type="text" v-model='addList' @keyup.enter = 'subList'>
+            key<input type="text" v-model='addList' @keyup.enter='subList'>
             <button @click='subList'>提交测试</button>
         </div>
     </div>
@@ -42,128 +38,138 @@
 
 <script>
     new Vue({
-        el:'#test',
+        el: '#test',
         data() {
             return {
-                msg:'',
-                textN:'100',
-                contList:[
-                    {name:'kevin'},
-                    {name:'li'},
-                    {name:'yes'},
-                    {name:'tom'},
-                    {name:'kevin'},
-                    {name:'li'},
-                    {name:'yes'},
-                    {name:'tom'},
-                    {name:'kevin'},
-                    {name:'li'},
-                    {name:'yes'},
-                    {name:'tom'},
+                msg: '',
+                textN: '100',
+                contList: [
+                    { name: 'kevin' },
+                    { name: 'li' },
+                    { name: 'yes' },
+                    { name: 'tom' },
+                    { name: 'kevin' },
+                    { name: 'li' },
+                    { name: 'yes' },
+                    { name: 'tom' },
+                    { name: 'kevin' },
+                    { name: 'li' },
+                    { name: 'yes' },
+                    { name: 'tom' },
                 ],
-                listW:'listW',
-                contListC:'contListC',
-                isShow:false,
-                textValue:'折叠',
-                addList:'',
-                testList:[
-                    {key:1},
-                    {key:2},
-                    {key:3},
-                    {key:4},
-                    {key:5},
-                    {key:6},
+                listW: 'listW',
+                contListC: 'contListC',
+                isShow: false,
+                textValue: '折叠',
+                addList: '',
+                testList: [
+                    { key: 1 },
+                    { key: 2 },
+                    { key: 3 },
+                    { key: 4 },
+                    { key: 5 },
+                    { key: 6 },
                 ]
             }
         },
         methods: {
-            qwe(){
-                console.log(this.msg,this.msg.length);
+            qwe() {
+                console.log(this.msg, this.msg.length);
             },
-            test(){
+            test() {
                 console.log('11112222s');
             },
-            reduce(){
+            reduce() {
                 this.isShow = !this.isShow
                 console.log(this.isShow);
                 if (this.isShow) {
                     this.textValue = '打开全部'
-                }else{
+                } else {
                     this.textValue = '折叠'
                 }
             },
-            subList(){
+            subList() {
                 console.log('点击提交');
                 if (this.addList.trim()) {
-                    this.testList.push({key:this.addList})
-                }else{
+                    this.testList.push({ key: this.addList })
+                } else {
                     alert('请输入内容')
                     return
                 }
-                
+
                 // let arr = [{key:this.addList}]
                 // arr.concat(this.testList)
-                this.addList=''
-                console.log(this.testList,this.addList);
+                this.addList = ''
+                console.log(this.testList, this.addList);
             }
         },
         computed: {
-            qwe(){
+            qwe() {
                 this.textN = this.textN - this.msg.length
             }
         },
     })
 </script>
 <style>
-    *{
+    * {
         margin: 0;
         padding: 0;
     }
-    ul li{
+
+    ul li {
         list-style: none;
     }
-    .textC{
+
+    .textC {
         width: 200px;
         height: 200px;
         outline: none;
         /* 边框禁止高亮 */
-        resize:none;
+        resize: none;
         /* 禁止缩放 */
     }
-    #content{
+
+    #content {
         width: 100%;
     }
-    .contListC{
+
+    .contListC {
         width: 100%;
         height: 300px;
         text-align: center;
         background-color: #bbffaa;
     }
-    .contentLi{
+
+    .contentLi {
         width: 100px;
         height: 25px;
         background-color: red;
         color: white;
     }
-    .listW{
-        height:100px;
+
+    .listW {
+        height: 100px;
         width: 100%;
         text-align: center;
-        background-color:beige;
+        background-color: beige;
         overflow: hidden;
     }
-    .btn{
+
+    .btn {
         width: 60px;
         height: 30px;
     }
-    #testAddList{
+
+    #testAddList {
         width: 400px;
         overflow: hidden;
     }
-    .testC{
+
+    .testC {
         width: 400px;
         height: 200px;
         overflow-y: scroll;
     }
 </style>
+
 </html>
