@@ -1,65 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>搜索</title>
 </head>
+
 <body>
     <div id="demo">
-        <input type="text" v-model = "searchName">
-        <ul>    
-            <li v-for = '(item,index) in newPerson' :key = 'item.id'>
+        <input type="text" v-model="searchName">
+        <ul>
+            <li>序列-名称-年龄</li>
+            <li v-for='(item,index) in newPerson' :key='item.id'>
                 {{item.id}} -- {{item.name}} -- {{item.age}}
             </li>
         </ul>
-        <button @click = 'order = 2'>年龄升序</button>
-        <button @click = 'order = 3'>年龄降序</button>
-        <button @click = 'order = 1'>原本顺序</button>
+        <button @click='order = 2'>年龄升序</button>
+        <button @click='order = 3'>年龄降序</button>
+        <button @click='order = 1'>原本顺序</button>
     </div>
-    
+
 </body>
 <script src="../js/vue.js"></script>
 <script>
     new Vue({
-        el:'#demo',
-        data(){
-            return{
-                searchName :'',
-                order:1,//默认是1-原本排序，2-升序，3-降序
-                person:[
-               {id:1,name:'tom',age:10},
-               {id:2,name:'to',age:12},
-               {id:3,name:'t',age:19},
-               {id:4,name:'tm',age:17},
-               {id:5,name:'om',age:13},
+        el: '#demo',
+        data() {
+            return {
+                searchName: '',
+                order: 1,//默认是1-原本排序，2-升序，3-降序
+                person: [
+                    { id: 1, name: 'tom', age: 10 },
+                    { id: 2, name: 'to', age: 12 },
+                    { id: 3, name: 't', age: 19 },
+                    { id: 4, name: 'tm', age: 17 },
+                    { id: 5, name: 'om', age: 13 },
                 ]
             }
         },
-        computed:{
-            newPerson(){
-//搜索过滤
-                const {searchName,person,order} = this
+        computed: {
+            newPerson() {
+                //搜索过滤
+                const { searchName, person, order } = this
                 const arr = person.filter(
-                    (item,index)=> item.name.indexOf(searchName) !== -1)
-//升序和降序
-                if(order !== 1){
-                    if(order === 2){
-                        arr.sort((p1,p2)=>
-                          {return  p1.age - p2.age}
+                    (item, index) => item.name.indexOf(searchName) !== -1)
+                //升序和降序
+                if (order !== 1) {
+                    if (order === 2) {
+                        arr.sort((p1, p2) => { return p1.age - p2.age }
                         )
-                    }else if(order === 3){
-                        arr.sort((p1,p2)=>
-                          {return  p2.age - p1.age}
+                    } else if (order === 3) {
+                        arr.sort((p1, p2) => { return p2.age - p1.age }
                         )
                     }
 
                 }
                 return arr
             }
-    
+
         }
     })
 
 </script>
+
 </html>

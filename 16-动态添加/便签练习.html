@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>便签-保存</title>
+</head>
+
+<body>
+    <div id="simple">
+        <div id="box">
+            <textarea v-model="text" maxlength="200" required>{{text}}</textarea>
+        </div>
+        <p id="numShow">字数显示<span>{{this.allLength - text.length}}</span></p>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el: '#simple',
+        data() {
+            return {
+                text: '111111111111',
+                allLength: 200
+            }
+        },
+        mounted() {
+            if (localStorage.getItem('textContent')) {
+                this.text = JSON.parse(localStorage.getItem('textContent'))
+            }
+        },
+        computed: {
+
+        },
+        watch: {
+            text(newValue) {
+                // console.log(newValue);
+                localStorage.setItem('textContent', JSON.stringify(newValue))
+                // console.log(newValue,oldValue);
+            }
+        }
+    })
+</script>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #simple {
+        width: 100%;
+        height: 100%;
+    }
+
+    #box {
+        width: 400px;
+        height: 400px;
+        background-color: #bbffcc;
+    }
+
+    textarea {
+        width: 400px;
+        height: 400px;
+        font-size: 20px;
+        font-family: Serif;
+        outline: none;
+        resize: none;
+        /* 禁止缩放 */
+    }
+
+    #numShow {
+        margin-top: 10px;
+
+    }
+
+    #numShow>span {
+        color: red;
+        font-size: 12px;
+    }
+</style>
+
+</html>
