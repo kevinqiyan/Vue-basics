@@ -10,7 +10,7 @@
 <body>
     <div id="simple">
         <div id="box">
-            <textarea v-model="text" maxlength="200" required>{{text}}</textarea>
+            <textarea v-model="text" maxlength="200" required @keydown='keyDown'>{{text}}</textarea>
         </div>
         <p id="numShow">字数显示<span>{{this.allLength - text.length}}</span></p>
     </div>
@@ -28,6 +28,21 @@
         mounted() {
             if (localStorage.getItem('textContent')) {
                 this.text = JSON.parse(localStorage.getItem('textContent'))
+            }
+        },
+        methods: {
+            keyDown(e) {
+                // if (e.keyCode === 9) {
+                //     console.log('keyCode === 9');
+                //     if (!this.text) this.text = ''
+                //     this.text += '\t'
+                //     // 阻止默认切换元素的行为
+                //     if (e && e.preventDefault) {
+                //         e.preventDefault()
+                //     } else {
+                //         window.event.returnValue = false
+                //     }
+                // }
             }
         },
         computed: {
@@ -57,15 +72,18 @@
         width: 400px;
         height: 400px;
         background-color: #bbffcc;
+        /* overflow: hidden; */
     }
 
     textarea {
         width: 400px;
         height: 400px;
+        max-width: 400px;
         font-size: 20px;
         font-family: Serif;
         outline: none;
         resize: none;
+        overflow: hidden;
         /* 禁止缩放 */
     }
 
