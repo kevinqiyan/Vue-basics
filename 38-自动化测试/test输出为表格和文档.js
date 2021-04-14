@@ -19,7 +19,7 @@ let nullArray = [];
     // })
 
 
-    await driver.get('测试数据网站');
+    await driver.get('大数据测试网站');
     await driver.findElement(By.css('.custom_input')).sendKeys("4CEBBD3F8A07");
     driver.findElement(By.id('guide_start_btn')).click();
 
