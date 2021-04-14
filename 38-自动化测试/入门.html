@@ -6,8 +6,41 @@
     <title>自动化测试</title>
 </head>
 <body>
-    
+    <div id="test">
+        <table>
+            <tbody>
+                <!-- <tr v-for="(item, index) in list" :key="index">11</tr> -->
+                <tr  v-for="(item, index) in list" id="tr">
+                    <td id="td">1</td>
+                    <td id="td">2</td>
+                    <td id="td">3</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
 </body>
+<script src="../js/vue.js"></script>
 <script>
+    new Vue({
+        el:'#test',
+        data() {
+            return {
+                list:10,
+                a:1,
+            }
+        },
+    })
 </script>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    tr{
+        /* width: 20px; */
+        height: 10px;
+        background-color: #bbffcc;
+    }
+</style>
 </html>

@@ -1,5 +1,10 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
-
+var xlsx = require('node-xlsx');
+var fs = require('fs');
+const { type } = require('os');
+var window = window;
+var dataExe = [];
+var dataArray = [];
 (async function example() {
   let driver = await new Builder().forBrowser('chrome').build();
   try {
@@ -13,22 +18,23 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
     // })
 
 
-    await driver.get('测试网站（大数据）');
+    await driver.get('测试数据网站');
     await driver.findElement(By.css('.custom_input')).sendKeys("4CEBBD3F8A07");
     driver.findElement(By.id('guide_start_btn')).click();
+
     // console.log(driver.findElement(By.id('guide_start_btn')),'11111');
     // let array2 = driver.findElement(By.css('#query_result_table>tbody'))
     // let seach = array2.findElement(By.name('tr'))
     // console.log(seach,'search');
     // var array =[]
-    setTimeout(() => {
-      let a = driver.findElements(By.css('#query_result_table tbody tr'))
-      a.then((req) => {
-        // array = req
-        console.log('array数组', req);
-      })
-
-    }, 10000);
+    // await driver.wait(until.elementLocated(By.css('#query_result_table tbody tr')),10000)
+      // await driver.manage().setTimeouts({ implicit: 10000 });
+      // let abb = driver.findElements(By.css('#query_result_table tbody tr'))
+      // let this_ = this.driver
+      // for (const e of abb) {
+      //   assert.strictEqual(await e.getText())
+      //   console.log( await e.getText());
+      // }
 
     // array.then((res)=>{
     //   console.log(res,'成功');
@@ -48,4 +54,41 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
   } finally {
     console.log('文档执行成功了');
   }
+  setTimeout(function(){
+
+    driver.findElement(By.id('act_start_btn')).click();
+    let abb = driver.findElements(By.css('#query_result_table tbody tr'))
+    // console.log(typeof abb,abb);
+    abb.then((req)=>{
+      
+      for (const e of req) {
+        e.getText().then((res)=>{
+          dataArray.push(res);
+      
+        })
+
+      }
+      setTimeout(()=>{
+        // dataExe = xlsx.build([{name:'表格',data:dataArray}]);
+        // JSON.stringify(dataArray)
+        let abcd = JSON.stringify(dataArray)
+        fs.writeFileSync('./数据.txt',abcd)
+        // console.log(dataArray.split(','));
+        // let abc = dataArray.split(',');
+        // for (let index = 0; index < abc.length; index++) {
+        //   const element = abc[index];
+        //   dataExe.push(element)
+        // }
+        // console.log(dataExe);
+        // dataExe = xlsx.build([{name:'表格',data:dataArray}]);
+        // fs.writeFileSync('./表格.xlsx',dataExe)
+      },5000)
+    })
+    // console.log(dataExe);
+
+    // 输出为exel文件
+    // dataExe = xlsx.build([{name:'表格',data:dataArray}]);
+    // fs.writeFileSync('./表格.xlsx',dataExe,'binary')
+
+  }, 5000);
 })();
