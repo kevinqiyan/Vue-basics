@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echarts图表练习</title>
+</head>
+<body>
+    <div id="box" style="width: 400px;height: 600px;">
+
+    </div>
+</body>
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('box'))
+    // 指定图表的配置项和数据
+    var option = {
+        title:{
+            text:'第一个Echarts 示例'
+        },
+        tooltip:{}//配置提示信息
+    }
+</script>
+</html>

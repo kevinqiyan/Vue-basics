@@ -27,9 +27,10 @@
     ]
     var ar = [
         [
-            ["武昌区", "洪山区"],
+            ["武昌区"],
             ["夷陵区"],
-            ["咸安区"]
+            ["咸安区"],
+            ["洪山区"]
         ],
         [
             ["芙蓉区"],
@@ -56,6 +57,7 @@
 
     function getcity() {
         c.length = 1;
+        a.length = 1;
         var sw = s.selectedIndex; //找到省份位置，从而好使后面的城市与省份对应
         var citys = city[sw - 1];
         for (var j = 0; j < citys.length; j++) {

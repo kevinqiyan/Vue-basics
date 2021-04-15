@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组比较</title>
+</head>
+
+<body>
+</body>
+<script>
+    const arr1 = [
+        { id: "1", },
+        { id: "2", },
+        { id: "3", },
+        { id: "4", },
+        { id: "5", },
+    ];
+    const arr2 = [
+        { id: "1", },
+        { id: "2", },
+        { id: "3", },
+        { id: "4", }
+    ];
+    console.log(arr1.length,'获取数组的长度',arr2.length);
+    let add = arr1.filter(item=>!arr2.some(e=>e.id === item.id))
+    // arr2.push(add)
+    for (let index = 0; index < add.length; index++) {
+        const element = add[index];
+        arr2.push(element)
+    }
+    console.log(arr2,'添加',add);
+    // const map = new Map(arr2.map(item=>[item.id,item]))
+    // const mapTwo = new Map(arr1.map(item=>[item.id,item]))
+
+</script>
+
+</html>
