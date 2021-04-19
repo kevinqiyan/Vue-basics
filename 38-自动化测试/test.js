@@ -1,12 +1,20 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 var xlsx = require('node-xlsx');
 var fs = require('fs');
+var jsdom = require('jsdom');
+var JSDOM = jsdom.JSDOM;
+var document = new JSDOM().window.document;
+const { window } = new JSDOM(`...`);
 const { type } = require('os');
-var window = window;
-
 var dataExe = [];
 var dataArray = [];
 let nullArray = [];
+
+
+// const jsdom = require("jsdom");
+// const { JSDOM } = jsdom;
+// const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
+// console.log(dom.window.document.querySelector("p").textContent);
 
 (async function example() {
   let driver = await new Builder().forBrowser('chrome').build();
@@ -27,18 +35,27 @@ let nullArray = [];
     //   assert.strictEqual(event['current_value'], '')
     //   assert.strictEqual(event['old_value'], 'display:none;')
     // })
-
-
-    await driver.get('测试数据网站');
+    await driver.get('http://realtime.data.lenovomm.com/bugatti/');
     await driver.findElement(By.css('.custom_input')).sendKeys("4CEBBD3F8A07");
     driver.findElement(By.id('guide_start_btn')).click(); //页面button初始化状态->开始
     driver.findElement(By.css('.tip_option .dropdown-toggle')).click()
     driver.findElement(By.id('filter_str')).click();
     driver.findElement(By.id('filter_str')).sendKeys("MC");
-    // let btnt = await driver.findElement(By.css('#act_start_btn')).getText()
-    // console.log(btnt,'文本');
+    let btnt = await driver.findElement(By.css('#act_start_btn')).getText()
 
-    // window.document.getElementById('#act_start_btn').onclick = function(){
+    console.log(btnt,'文本');
+    // setTimeout(() => {
+
+    //   console.log( document.getElementById('act_start_btn'),'document');
+    // }, 10000);
+    
+    // document.getElementById('act_start_btn').addEventListener('click',function(){
+    //   console.log('点击切换状态了');
+    // })
+    // lis.addEventListener('click',function(){
+    //   console.log('点击进行切换了');
+    // })
+    // document.getElementById('#act_start_btn').onclick = function(){
     //   let btnt =  driver.findElement(By.css('#act_start_btn')).getText()
     //   console.log(btnt, '文本');
     // }
@@ -58,8 +75,6 @@ let nullArray = [];
       //   getData()
       // }
     // }, 10000);
-    
-
   } finally {
     console.log('文档执行成功了');
   }
@@ -128,3 +143,9 @@ let nullArray = [];
 
   // }, 10000);
 })();
+
+  
+
+  
+
+
