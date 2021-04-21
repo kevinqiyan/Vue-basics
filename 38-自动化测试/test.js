@@ -3,7 +3,7 @@ var xlsx = require('node-xlsx');
 var fs = require('fs');
 var jsdom = require('jsdom');
 var JSDOM = jsdom.JSDOM;
-var document = new JSDOM().window.document;
+const { document } = (new JSDOM(`...`)).window;
 const { window } = new JSDOM(`...`);
 const { type } = require('os');
 var dataExe = [];
@@ -35,7 +35,7 @@ let nullArray = [];
     //   assert.strictEqual(event['current_value'], '')
     //   assert.strictEqual(event['old_value'], 'display:none;')
     // })
-    await driver.get('测试网址');
+    await driver.get('http://realtime.data.lenovomm.com/bugatti/');
     await driver.findElement(By.css('.custom_input')).sendKeys("4CEBBD3F8A07");
     driver.findElement(By.id('guide_start_btn')).click(); //页面button初始化状态->开始
     driver.findElement(By.css('.tip_option .dropdown-toggle')).click()
@@ -44,6 +44,8 @@ let nullArray = [];
     let btnt = await driver.findElement(By.css('#act_start_btn')).getText()
 
     console.log(btnt,'文本');
+    // let wd = window.document.getElementById('act_start_btn')
+    // console.log('wddd',wd);
     // setTimeout(() => {
 
     //   console.log( document.getElementById('act_start_btn'),'document');
@@ -143,9 +145,20 @@ let nullArray = [];
 
   // }, 10000);
 })();
-
-  
-
-  
-
-
+console.log('查看document有什么',document);
+setTimeout(() => {
+  // document.getElementById('act_start_btn').addEventListener('click',function(){
+  //   console.log('进行点击了');
+  // })
+//  let abc = document.getElementById('act_start_btn')
+//  console.log('查看abc',abc);
+let bcd = document.hasChildNodes('act_start_btn')
+console.log('查看bcd',bcd);
+ let abc = document.getElementById('act_start_btn')
+//  let cbd = document.getElementsByClassName('btn-default')
+//  cbd.addEventListener('click',function(){
+//    console.log('进行点击了');
+//  })
+//  console.log('查看abc',abc);
+//  console.log('查看cbd',cbd);
+}, 10000);
