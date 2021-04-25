@@ -11,7 +11,7 @@ let jsonData = {};
   let driver = await new Builder().forBrowser('chrome').build();
   try {
     await driver.manage().setTimeouts({ implicit: 1000 });
-    await driver.get('测试网址');
+    await driver.get('http://realtime.data.lenovomm.com/bugatti/');
     await driver.findElement(By.css('.custom_input')).sendKeys("4CEBBD3F8A07");
     driver.findElement(By.id('guide_start_btn')).click();
     driver.findElement(By.css('.tip_option .dropdown-toggle')).click()
