@@ -35,7 +35,7 @@ let nullArray = [];
     //   assert.strictEqual(event['current_value'], '')
     //   assert.strictEqual(event['old_value'], 'display:none;')
     // })
-    await driver.get('http://realtime.data.lenovomm.com/bugatti/');
+    await driver.get('测试网址');
     await driver.findElement(By.css('.custom_input')).sendKeys("4CEBBD3F8A07");
     driver.findElement(By.id('guide_start_btn')).click(); //页面button初始化状态->开始
     driver.findElement(By.css('.tip_option .dropdown-toggle')).click()
