@@ -15,8 +15,8 @@ let jsonData = {};
     await driver.findElement(By.css('.custom_input')).sendKeys("4CEBBD3F8A07");
     driver.findElement(By.id('guide_start_btn')).click();
     driver.findElement(By.css('.tip_option .dropdown-toggle')).click()
-    driver.findElement(By.id('filter_appkey')).click();
-    driver.findElement(By.id('filter_appkey')).sendKeys("C9F75135EGPA");
+    // driver.findElement(By.id('filter_appkey')).click();
+    // driver.findElement(By.id('filter_appkey')).sendKeys("C9F75135EGPA");
     driver.findElement(By.id('filter_str')).click();
     driver.findElement(By.id('filter_str')).sendKeys("MC");
 
@@ -54,6 +54,9 @@ let jsonData = {};
         for (let index = 0; index < abcd.length; index++) {
           const element = abcd[index].replace("SlJKUE0yMDEyMTAwMDMxNyNIVUFXRUkjQk9ISy1XQVg5WA==","");
           // console.log(typeof element,'查看element',element);
+          let str = element.split(' ').slice(2,4)
+          let str2 = element.split(' ').slice(6)
+          element = str.concat(str2)
           nullArray.push(element)
           // nullArray.push(JSON.stringify(element).split(',')[0])
         }
