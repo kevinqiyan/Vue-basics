@@ -21,7 +21,10 @@ let jsonData = {};
     driver.findElement(By.id('filter_str')).sendKeys("MC");
 
 
-  } finally {
+  }catch{
+    console.log(error);
+  }
+  finally {
     console.log('文档执行成功了');
   }
   setTimeout(function () {
@@ -44,7 +47,7 @@ let jsonData = {};
           dataArray.push(res);
 
         })
-
+        // driver.close()
       }
       setTimeout(() => {
         // dataExe = xlsx.build([{name:'表格',data:dataArray}]);
@@ -52,11 +55,12 @@ let jsonData = {};
         // let abcd = JSON.stringify(dataArray)
         let abcd = dataArray
         for (let index = 0; index < abcd.length; index++) {
-          const element = abcd[index].replace("SlJKUE0yMDEyMTAwMDMxNyNIVUFXRUkjQk9ISy1XQVg5WA==","");
+          let element = abcd[index].replace("SlJKUE0yMDEyMTAwMDMxNyNIVUFXRUkjQk9ISy1XQVg5WA==","");
           // console.log(typeof element,'查看element',element);
           let str = element.split(' ').slice(2,4)
           let str2 = element.split(' ').slice(6)
           element = str.concat(str2)
+          element = {...element}
           nullArray.push(element)
           // nullArray.push(JSON.stringify(element).split(',')[0])
         }
@@ -64,8 +68,25 @@ let jsonData = {};
         // fs.writeFileSync('./数据.txt', JSON.stringify(nullArray))
         // dataExe = xlsx.build([{ name: '表格', data: nullArray}]);
         // fs.writeFileSync('./表格.xlsx', dataExe)
+        driver.close()
       }, 5000)
     })
 
   }, 10000);
 })();
+
+// node服务器
+const express = require('express')
+
+const app = express()
+app.get('/', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");  // 允许所有路径跨域
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.statusCode = 200;
+    res.send(JSON.stringify(nullArray));
+    // res.write('{"id":"123",name:"jack",arg:11111}')
+})
+app.listen(4000, () => {
+    console.log('服务器运行成功');
+})
