@@ -8,7 +8,7 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
     let a = (await driver.findElement(By.id('test')))
     // let b = await driver.findElements(By.css('#tr td'))
     let b = await driver.findElements(By.css('#tr'))
-    console.log('查看b的信息是什么',b);
+    // console.log('查看b的信息是什么',b);
     for (const e of b) {
       console.log(await e.getText());
     }
@@ -25,5 +25,6 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
     // })
   } finally {
     console.log('文档执行成功了');
+    driver.close()
   }
 })();
