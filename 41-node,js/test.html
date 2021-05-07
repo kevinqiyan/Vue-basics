@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试node</title>
+</head>
+<body>
+    <div id="test">
+
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script>
+    $.ajax({
+        url:'http://localhost:3000/',
+        type:'GET',
+        // dataType:'binary',
+        success:function(data){
+            $('#test').html(data);
+
+        },
+        error:function(error){
+            alert(error)
+        }
+    })
+</script>
+</html>
