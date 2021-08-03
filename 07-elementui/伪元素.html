@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <title>伪元素</title>
+</head>
+
+<body>
+    <!-- CSS 伪元素用于设置元素指定部分的样式。
+        ::after
+        ::before
+        ::first-letter
+        ::first-line
+        ::selection
+    -->
+    <div id="box">
+        <el-switch v-model="value" active-color="#13ce66" inactive-color="#ff4949" @change='change' :disabled=this.value>
+        </el-switch>
+        
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#box',
+        data() {
+            return {
+                value:false
+            }
+        },
+        methods: {
+            change(val){
+                console.log('val',val);
+            }
+        },
+    })
+</script>
+<style>
+
+</style>
+</html>
