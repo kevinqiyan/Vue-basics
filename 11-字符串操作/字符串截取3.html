@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div>
+    <button id="testBtn">进行测试test数据</button>
+</div>
+</body>
+<script>
+    var test = '2.2.2'
+    var test2 = 'cf.sdg.sg'
+    var test3 = '222'
+    var test4 = '0.2.0'
+    var test5 ='sgjksgjsk'
+    // let abc = test.split('.')
+    let testBtn = document.getElementById('testBtn')
+    testBtn.onclick = function(){
+        let abc = test2.split('.')
+        console.log('abc',abc);
+        if (abc.length === 3 && format(abc)) {
+            console.log('测试条件成立,版本号正确');
+        }else{
+            console.log('请正确输入版本号');
+        }
+        // console.log(test, 'abc', abc);
+        // format(abc)
+    }
+    
+    // const arr = test.split('.')
+    // console.log(arr.length);
+    // console.log(Number(test3));
+
+    function format(array) {
+        // for (var element of array) {
+        //     console.log('element',element);
+        //     element = Number(element)
+        //     console.log('typeof element',element);
+        //     if (typeof element === 'number' && element !== NaN) {
+        //         console.log('版本号正确',element);
+        //         return true
+        //     } else {
+        //         return false
+        //         console.log('元素不是数字');
+        //     }
+        // }
+        for (let index = 0; index < array.length; index++) {
+            let element = array[index];
+            console.log('element',element);
+            // element = Number(element)
+            // element = parseInt(element)
+            // console.log(typeof(typeof element),'element',element);
+            // if (element === 'NaN') {
+            //     return false
+
+            // }else{
+            //     return true
+            //     console.log('ghjksflked;sgkosgkp');
+            // }
+            // if (typeof element === 'number' && element !== 'NaN') {
+            //     console.log('进来了');
+            // }else{
+            //     console.log('错误的提示');
+            // }
+        }
+    }
+
+
+</script>
+
+</html>
