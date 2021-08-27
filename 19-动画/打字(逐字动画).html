@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>打字动画</title>
+</head>
+<body>
+  <div id="text">
+    <span id="contain">
+      
+    </span>
+    <span>|</span>
+  </div>
+</body>
+<script>
+  var contain = document.getElementById('contain');
+  const data = '测试打字动画 ';
+  let index = 0;
+  function writing(){
+    if(index < data.length){
+      contain.innerHTML += data[index]
+      setTimeout(writing.bind(this), 200, ++index);
+      console.log(index,'index');
+    }else{
+      index = 0
+      console.log('index === 0 ?');
+      contain.innerHTML = ''
+      // setTimeout(writing.bind(this), 200, ++index);
+    }
+  }
+  writing()
+</script>
+<style>
+  #contain{
+    transition: width 2s;
+  }
+</style>
+</html>

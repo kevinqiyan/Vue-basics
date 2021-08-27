@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>路由过滤测试</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  let array = [
+    {
+      m_id: '1',
+      children: [
+        {
+          m_id: '1.1'
+        },
+        {
+          m_id: '1.2'
+        },
+        {
+          m_id: '1.3'
+        }
+      ]
+    },
+    {
+      m_id: '2',
+      children: [
+        {
+          m_id: '2.1'
+        },
+        {
+          m_id: '2.2'
+        },
+        {
+          m_id: '2.3'
+        }
+      ]
+    },
+    {
+      m_id: '3',
+      children: [
+        {
+          m_id: '3.1'
+        },
+        {
+          m_id: '3.2'
+        },
+        {
+          m_id: '3.3'
+        }
+      ]
+    }
+  ]
+
+  let staic = [
+    {
+      m_id: '1',
+      children: [
+        {
+          m_id: '1.1'
+        },
+        {
+          m_id: '1.2'
+        },
+        {
+          m_id: '1.3'
+        }
+      ]
+    },
+    {
+      m_id: '2',
+      children: [
+        {
+          m_id: '2.1'
+        },
+        {
+          m_id: '2.2'
+        },
+        {
+          m_id: '2.3'
+        }
+      ]
+    },
+    {
+      m_id: '3',
+      children: [
+        {
+          m_id: '3.1'
+        },
+        {
+          m_id: '3.2'
+        },
+        {
+          m_id: '3.3'
+        }
+      ]
+    },
+    {
+      m_id: '4',
+      children: [
+        {
+          m_id: '4.1'
+        },
+        {
+          m_id: '4.2'
+        },
+        {
+          m_id: '4.3'
+        }
+      ]
+    },
+    {
+      m_id: '5',
+      children: [
+        {
+          m_id: '5.1'
+        },
+        {
+          m_id: '5.2'
+        },
+        {
+          m_id: '5.3'
+        }
+      ]
+    },
+    {
+      m_id: '6',
+      children: [
+        {
+          m_id: '6.1'
+        },
+        {
+          m_id: '6.2'
+        },
+        {
+          m_id: '6.3'
+        }
+      ]
+    }
+  ]
+  let listID = [], child_listID = [], arrerror;
+  //保存接口返回的菜单id
+  list.map((item, index) => {
+    listID.push(item.m_id);
+    item.child_list.map((Q, index) => {
+      child_listID.push(Q.m_id)
+    })
+  });
+
+  // 一级菜单筛选
+  let filter = (condition, data) => {
+    let arr = [];
+    data.filter(item => {
+      if (item.path == '*') {
+        arrerror = item;
+      }
+      return condition.map((items, index) => {
+        if (item.m_id == items) {
+          arr.push(item);
+        }
+      })
+    });
+    return arr
+  };
+  //二级菜单筛选
+  let filters = (condition, data) => {
+    data.map(k => {
+      k.NEWchildren1 = [];
+      k.children.map((j, index) => {
+        condition.map((items) => {
+          if (j.m_id == items) {
+            k.NEWchildren1.push(j)
+          }
+        })
+      })
+    });
+    return data
+  };
+
+  let children = filter(listID, asyncRoutes);
+
+  filters(child_listID, children).map((item, index) => {
+    item.children = item.NEWchildren1;
+  });
+  children.push(arrerror);
+  let accessRoutes;
+  accessRoutes = children || []
+
+</script>
+
+</html>
