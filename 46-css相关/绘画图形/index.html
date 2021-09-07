@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>绘画三角形</title>
+</head>
+
+<body>
+  <div id="content">
+    <!-- 平行四边形 -->
+    <div id="first">
+      <div id="one" class="public"></div>
+      <div id="two" class="public"></div>
+    </div>
+    <!-- 直角三角形 -->
+    <div id="thre"></div>
+    <div id="thre1"></div>
+  </div>
+</body>
+<style>
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .public {
+    width: 0px;
+    height: 0px;
+    border-bottom: 100px solid red;
+    border-top: 100px solid transparent;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    /* border-top: 100px solid blue;
+    border-left: 100px solid black;
+    border-right:100px solid orange; */
+  }
+
+  #first {
+    position: relative;
+  }
+
+  #one {
+    position: absolute;
+    transform: rotate(180deg);
+    top: 100px;
+    left: 100px;
+  }
+  #thre{
+    width: 0px;
+    height: 0px;
+    border-top: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 100px solid blue;
+    border-left: 100px solid blue;
+    margin-left: 10px;
+  }
+  #thre1{
+    width: 0px;
+    height: 0px;
+    border-top: 100px solid black;
+    border-right: 100px solid black;
+    border-bottom: 100px solid transparent;
+    border-left: 100px solid transparent;
+    margin-left: 10px;
+  }
+</style>
+
+</html>

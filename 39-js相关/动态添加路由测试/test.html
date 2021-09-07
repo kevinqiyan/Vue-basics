@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teat</title>
+</head>
+<body>
+  
+</body>
+<script>
+  var list = []
+  var listTwo = []
+  var listId = []
+  // 获取list m_id
+  list.map(item=>{
+    listId.push(item.m_id)
+  })
+  // 一级路由过滤
+  function listFilter(id,data){
+    data.filters(item=>{
+      id.map(items=>{
+        if (item.m_id === items) {
+          let arr = item
+          return arr
+        }
+      })
+    })
+  }
+// 二级路由过滤
+function chilFilter(){
+
+}
+</script>
+</html>

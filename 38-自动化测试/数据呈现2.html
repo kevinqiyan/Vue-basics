@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据呈现2</title>
+</head>
+
+<body>
+    <div id="view">
+        <button @click='getDatas'>点击请求</button>
+        <p>{{textData}}</p>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script>
+    new Vue({
+        el: '#view',
+        data() {
+            return {
+                textData: '',
+                lastimes: 0,
+            }
+        },
+        methods: {
+            getDatas() {
+
+                let now = new Date().getTime();
+                    if (now - this.lastimes > 1000) {
+                        this.lastimes = now;
+                        console.log('进行点击测试了');
+                        this.$http.get("http://localhost:3500/").then(function (res) {
+                            this.textData = parseInt(res.body)
+                            // this.textData = ++this.textData
+                        }, function () {
+                            console.log('请求 3500 接口失败');
+                        })
+                    }
+               
+
+
+
+            },
+
+        },
+    })
+</script>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象遍历并添加至数组</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var list = {
+        "aa":"11",
+        "bb":"22",
+        "cc":"33",
+        "dd":"44",
+        "ee":"55",
+    }
+    let arr = []
+    for (const key in list) {
+        if (list.hasOwnProperty(key)) {
+            const element = list[key];
+            console.log(key,'element',element);
+            arr.push({'name': key,'first':element})
+        }
+    }
+    console.log('arr',arr);
+</script>
+</html>
