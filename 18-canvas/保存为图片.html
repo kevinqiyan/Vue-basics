@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="screenshotsSection">
+    <a id="exportImgLink" class="export-img-link" download="test">
+      <img id="exportImg" class="export-img" alt="百科月报导出数据图" />
+    </a>
+    <!-- <img src="../image.jpg" alt="" style="width: 200px;"> -->
+    <button class="export-btn" @click="exportData">导出</button>
+  </div>
+</body>
+<script src="../js/html2canvas.min.js"></script>
+<script src="../js/vue.js"></script>
+
+<script>
+  // import html2canvas from 'html2canvas'
+  new Vue({
+    el: '#screenshotsSection',
+    data() {
+      return {
+
+      }
+    },
+    methods: {
+      exportData() {
+        html2canvas(document.querySelector('#screenshotsSection'), {
+          scale: 1, //放大一倍，使图像清晰一点
+          allowTaint: true, //允许污染
+          taintTest: true, //在渲染前测试图片(没整明白有啥用)
+          useCORS: true,
+        }).then((canvas) => {
+          const exportImgEle = document.querySelector('#exportImg');
+          const exportImgLinkEle = document.querySelector('#exportImgLink');
+          exportImgEle.src = canvas.toDataURL('image/png');
+          exportImgLinkEle.href = canvas.toDataURL('image/png');
+          exportImgLinkEle.click();  // 执行 <a> 元素的下载
+        });
+      },
+    },
+  })
+</script>
+
+</html>

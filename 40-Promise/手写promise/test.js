@@ -10,7 +10,7 @@
     _this.data = undefined
     _this.callback = []
 
-    function res(value) {
+    function resolve(value) {
       if (_this.status === PENDING) {
         _this.status = RES
         _this.data = value
@@ -24,7 +24,7 @@
       }
     }
 
-    function rej(reason) {
+    function reject(reason) {
       if (_this.status === PENDING) {
         _this.status = RES
         _this.data = reason
@@ -39,7 +39,7 @@
     }
 
     try {
-      executor(res, rej)
+      executor(resolve, reject)
     } catch (error) {
       rej(error)
     }
@@ -96,6 +96,25 @@
 
   Promise.prototype.catch = function (onRejected) {
     return this.then(undefined, onRejected)
+  }
+
+  // 成功返回函数采用 resolve
+  Promise.resolve = function (value) {
+    return new Promise((resolve, reject) => {
+      if (value instanceof Promise) {
+        // resolve(value)
+        value.then(resolve, reject)
+      } else {
+        resolve(value)
+      }
+    })
+  }
+
+  // 失败返回函数采用 reject
+  Promise.reject = function(value) {
+    return new Promise((resolve,reject)=>{
+      reject(value)
+    })
   }
 
   window.Promise = Promise
