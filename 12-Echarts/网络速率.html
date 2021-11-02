@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网络速率动态图</title>
+</head>
+
+<body>
+  <div id="main" style="width: 100%;height: 100%;">
+    <div id="top" style="width: 600px;height: 300px;"></div>
+    <div id="bottom" style="width: 600px;height: 300px;"></div>
+
+  </div>
+</body>
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<script>
+  var topDom = document.getElementById('top')
+  var botDom = document.getElementById('bottom')
+  var topChart = echarts.init(topDom)
+  var bottomChart = echarts.init(botDom)
+  var opction
+  var base = +new Date(2014, 9, 3);
+  var oneDay = 24 * 3600 * 1000;
+  var date = [];
+  var data = [Math.random() * 150];
+  var now = new Date(base);
+
+  function addData(shift) {
+    now = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/');
+    date.push(now);
+    data.push((Math.random() - 0.4) * 10 + data[data.length - 1]);
+    if (shift) {
+      date.shift();
+      data.shift();
+    }
+    now = new Date(+new Date(now) + oneDay);
+  }
+  for (var i = 1; i < 100; i++) {
+    addData();
+  }
+  option = {
+    xAxis: [
+    {
+      type: 'category',
+      boundaryGap: false,
+      data: date,
+      show: false,
+      gridIndex: 0,
+
+    },
+    {
+      type: 'category',
+      boundaryGap: false,
+      data: date,
+      show: false,
+      gridIndex: 1,
+    }
+    ],
+    yAxis:[ {
+      boundaryGap: [0, '50%'],
+      type: 'value',
+      show: false,
+      inverse: false, // 坐标轴反转
+      gridIndex: 0,
+    },{
+      boundaryGap: [0, '50%'],
+      type: 'value',
+      show: false,
+      inverse: true,
+      gridIndex: 1,
+    }],
+    series: [
+      {
+        name: '成交',
+        type: 'line',
+        smooth: true,
+        symbol: 'none',
+        stack: 'a',
+        areaStyle: {
+          normal: {}
+        },
+        data: data,
+        gridIndex: 0,
+      },
+      {
+        name: '测试',
+        type: 'line',
+        smooth: true,
+        symbol: 'none',
+        stack: 'a',
+        areaStyle: {
+          normal: {}
+        },
+        data: data,
+        gridIndex: 1,
+      }
+    ]
+  };
+  setInterval(function () {
+    addData(true);
+    topChart.setOption({
+      xAxis: [{
+        data: date,
+        gridIndex: 0,
+      },{
+        data: date,
+        gridIndex: 1,}],
+      series: [
+        {
+          name: '成交',
+          data: data,
+          gridIndex: 0,
+        },
+        {
+          name: '成交1111',
+          data: data,
+          gridIndex: 1,
+        }
+      ]
+    });
+
+    /*     bottomChart.setOption({
+          xAxis: {
+            data: date,
+            show: false,
+          },
+          yAxis: {
+            inverse: true,
+            show: false,
+          },
+          series: [
+            {
+              name: '成交',
+              data: data,
+              type: 'line',
+              symbol: 'none',
+              stack: 'a',
+              areaStyle: {
+                normal: {}
+              },
+            }
+          ]
+        }); */
+  }, 500);
+
+  option && topChart.setOption(option); // && bottomChart.setOption(option)
+</script>
+
+</html>
