@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>折线练习</title>
+</head>
+
+<body>
+  <div id="one">
+    <div id="oneFirst" style="width: 160px;height: 30px;">
+
+    </div>
+  </div>
+</body>
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<script>
+  var oneFirst = document.getElementById('oneFirst')
+  var myChart = echarts.init(oneFirst)
+  var option;
+  // var xdata = ['A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', ]
+  // var ydata = [10, 22, 28, 43, 29, 10, 13, 24, 10, 22, 28, 43, 29, 10, 13, 24, 10, 22, 28, 43, 29, 10, 13, 24, 10, 22, 28, 43, 29, 10, 13,10, 22, 28, 43, 29, 10, 13, 24, 10, 22, 28, 43, 29, 10, 13, 24, 10, 22, 28, 43, 29, 10, 13, 24, 10, 22, 28, 43, 29, 10, 13,]
+  var xdata = ['A','B','C','D','e','f','g','q','p','w', 'A','B','C','D','e','f','g','q','p','w', ]
+  // 10,22,28,33,29,22,24,26,23,21, 10,22,28,33,29,22,24,26,23,21,   'A','B','C','D','e','f','g','q','p','w', 'A','B','C','D','e','f','g','q','p','w'
+  var ydata = [10,22,28,33,29,22,24,26,23,21, 10,22,28,33,29,22,24,26,23,21, ]
+  function add() {
+    // ydata.push(29);
+    // xdata.push('G');
+    myChart.setOption({
+      series: [
+        {
+          data: ydata,
+          type: 'line',
+          // stack:'x',
+          areaStyle: {}
+        }
+      ]
+    });
+  }
+
+  option = {
+    xAxis: [{
+      data: xdata,
+      show: true,
+      boundaryGap:false,
+      // scale:true,   
+      minInterval:1,
+    }],
+    yAxis: [{
+      show: true,
+      // inverse: true,
+    }],
+    series: [
+      {
+        data: ydata,
+        type: 'line',
+        // stack:'x',
+        areaStyle: {},
+        // symbol: 'none',
+        smooth: false,
+        max:function(value){
+          return value.max * 2
+        },
+        min:'dataMin'
+      },
+      
+    ]
+  }
+  option && myChart.setOption(option);
+  setInterval(() => {
+    // add()
+    // ydata.shift()
+    // xdata.shift()
+    // console.log('ydata',ydata);
+  }, 1000);
+</script>
+
+</html>
