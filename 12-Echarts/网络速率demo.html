@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网络速率demo测试</title>
+</head>
+
+<body>
+  <div id="main" style="margin: 0 auto;width: 400px;height: 400px;margin-top: 100px;">
+    <div id="up" style="width: 400px;height: 60px;"></div>
+    <div style="background-color: rgb(188, 219, 253);width: 400px;height: 30px;" id="topBg"></div>
+    <div style="background-color: rgb(182, 244, 225);width: 400px;height: 30px;" id="downBg"></div>
+    <div id="down"></div>
+  </div>
+</body>
+<!-- <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script> -->
+<!-- <script src="../js/echarts.min.js"></script> -->
+<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.1.2/echarts.common.js"></script>
+<script>
+  var option;
+  var optionTwo;
+  var upDom = document.getElementById('up')
+  var downDom = document.getElementById('down')
+  var upChart = echarts.init(upDom)
+  var downChart = echarts.init(downDom)
+
+
+
+  option = {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      show: false,
+      position:'top',
+    },
+    yAxis: {
+      type: 'value',
+      show: false,
+    },
+    series: [
+      {
+        data: [0, 0, 20, 0, 0, 0, 0],
+        type: 'line',
+        smooth: false,
+        symbol: 'none',
+        areaStyle: {
+          color: "rgba(6, 217, 153, 0.3)",
+          origin:'start',
+          shadowColor: 'rgba(0, 0, 0, 0.5)',
+          // shadowBlur: 10
+        },
+        lineStyle:{
+          color: '#1B83F6',
+          width: 3
+        }
+      }
+    ],
+    grid: {
+      left: '0%',
+      right: '0%',
+      // top: 0,
+      // bottom: 1,
+    },
+  };
+
+  optionTwo = {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      show: false
+    },
+    yAxis: {
+      type: 'value',
+      inverse: true,
+    },
+    series: [
+      {
+        data: [0, 0, 20, 0, 0, 0, 0],
+        type: 'line',
+        smooth: false,
+        symbol: 'none',
+        areaStyle: {
+          color: "rgba(6, 217, 153, 0.3)"
+        },
+      }
+    ],
+    grid: {
+      left: '0%',
+      right: '0%',
+      top: 0,
+      bottom: 1,
+    },
+  }
+
+option && upChart.setOption(option);
+optionTwo && downChart.setOption(option);
+
+</script>
+
+</html>
