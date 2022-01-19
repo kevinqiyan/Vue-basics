@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>虚线-曲线</title>
+</head>
+
+<body>
+  <svg>
+    <g xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+      <g stroke-width="2" fill="white" stroke="black">
+        <circle cx="100" cy="50" r="40" stroke-dasharray="5,5"/>
+        <!-- <line x1="10" y1="20" x2='50' y2='50' stroke-width="4" style="stroke: blue;" stroke-dasharray='2,2'></line> -->
+      </g>
+      <g>
+        <path>
+
+        </path>
+      </g>
+
+      <!-- <g>
+      <line  x1="10" y1="10"  x2='20' y2='20'  stroke-width="4" style="stroke: blue;"></line>
+    </g> -->
+
+  </svg>
+
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <g stroke="#64a9c4" fill="#b1d1f7" stroke-width="4">
+      <circle r="50" cx="80" cy="80" stroke-dasharray="15,10"></circle>
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="360" begin="0s"
+        dur="2s" fill="freeze"></animateTransform>
+    </g>
+  </svg>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柱状图</title>
+</head>
+<body>
+    <div>
+        <div id="main" style="width: 600px;height: 400px;"></div>
+    </div>
+</body>
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<script>
+var main = document.getElementById('main');
+var initMain = echarts.init(main);
+var option;
+    option = {
+        title:{
+            text:'近四周拦截数',
+            left:50
+        },
+        tooltip:{
+            trigger:'axis',
+            axisPointer:{
+                type:'none'
+            },
+             formatter(params) {
+                const item = params[0];
+                return `${item.data} 次`;
+            },
+        },
+        xAxis: {
+            type: 'category',
+            axisTick: {
+                show: false // 坐标轴刻度是否显示
+            },
+            data: ['Mon', 'Tue', 'Wed', 'Thu']
+        },
+        yAxis: {
+            type: 'value',
+            show:true,
+            // splitNumber:5,
+            axisLine:{
+                show:true, //坐标轴是否显示
+                // symbol:'none'
+            },
+            axisTick:{
+                show:false // 坐标轴刻度是否显示
+            },
+        },
+        series: [
+            {
+                data: [12, 20, 15, 8],
+                type: 'bar',
+                barWidth:10
+            }
+        ]
+    };
+    option && initMain.setOption(option);
+</script>
+</html>

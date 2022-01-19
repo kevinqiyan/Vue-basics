@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间日期选择器</title>
+</head>
+
+<body>
+    <div id="main">
+        <el-form>
+            <el-form-item label="日期" prop="start_at">
+                <el-date-picker v-model="creatData.start_at" type="datetime" placeholder="选择开始时间" style="margin-right: 20px;"
+                    value-format="timestamp" format="yyyy-MM-dd HH:mm">
+                </el-date-picker>
+                <el-date-picker v-model="creatData.end_at" type="datetime" placeholder="选择结束时间" value-format="timestamp"
+                    format="yyyy-MM-dd HH:mm" :disabled="this.creatData.timeRadio ? true : false">
+                </el-date-picker>
+                <el-checkbox v-model="creatData.timeRadio" style="margin-left:10px" @change="timeRadioChange">长期
+                </el-checkbox>
+            </el-form-item>
+        </el-form>
+       
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#main',
+        data() {
+            return {
+                rules: [
+
+                ]
+            }
+        },
+    })
+</script>
+
+</html>
