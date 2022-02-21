@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>近30天的时间戳</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let timeArr = []
+    let timeTwo = [
+
+        {
+            'times':1642608000,
+            'count':1
+        },
+        {
+            'times':1641916800,
+            'count':12
+        },
+        {
+            'times':1641744000,
+            'count':21
+        },
+        {
+            'times':1640793600,
+            'count':13
+        },
+        {
+            'times':1641398400,
+            'count':42
+        }
+    ]
+    let testArr = []
+    // function get30times() {
+    //     let today = new Date(new Date().toLocaleDateString()).getTime() / 1000
+    //     for (let index = 29; index >= 0; index--) {
+    //         // console.log('times',today - 86400);
+    //         today = today - 86400
+    //         // console.log('time', today);
+    //         timeArr.push(today)
+    //     }
+
+    // }
+    function get30times() {
+        return new Promise((resolve, reject) => {
+            try {
+                let today = new Date(new Date().toLocaleDateString()).getTime() / 1000
+                for (let index = 29; index >= 0; index--) {
+                    today = today - 86400
+                    timeArr.push({'times':today,'count':0})
+                }
+                resolve(true)
+            } catch (error) {
+                reject(false)
+            }
+
+        })
+    }
+    function xunhuan() {
+        get30times().then(() => {
+        getDiff()
+        console.log('testArr',timeArr);
+    })}
+
+    
+
+    function  getDiff() {
+
+        for (let index = 0; index < timeArr.length; index++) {
+            for (let j = 0; j < timeTwo.length; j++) {
+               if (timeArr[index].times === timeTwo[j].times) {
+                timeArr[index].count = timeTwo[j].count
+               }
+            }
+            
+        }
+        
+    }
+    xunhuan()
+</script>
+
+</html>

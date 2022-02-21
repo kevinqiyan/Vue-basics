@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间戳截取</title>
+</head>
+
+<body>
+</body>
+<script>
+    // var time = new Date().getTime().toString()
+    // time = time.slice(0,time.length -3)
+    // console.log(time,'time',typeof time);
+    if (callback) {
+        let data = JSON.parse(msg)
+        let trueData = []
+        let falseTime = []
+        let falseName = []
+        if (data.blocklist) {
+            for (let index = 0; index < data.blocklist.length; index++) {
+                const element = data.blocklist[index];
+                if (newTime - element.time > 2419200) {
+                    element.time = '-'
+                    element.count = 0
+
+                }
+                if (element.status === 1) {
+                    element.status = true
+                    trueData.push(element)
+
+                } else {
+                    element.status = false
+                    if (element.time && element.time !== '-') {
+                        falseTime.push(element)
+
+                    } else {
+                        falseName.push(element)
+
+                    }
+
+                }
+
+            }
+            falseTime = falseTime.sort((a, b) => {
+                return a.time - b.time
+            })
+            falseName = falseName.sort()
+            trueData = trueData.sort((a, b) => {
+                return a.time - b.time
+            })
+            data.blocklist = [...trueData, ...falseTime, ...falseName]
+
+        }
+
+        callback(status, data)
+
+    }
+</script>
+
+</html>
