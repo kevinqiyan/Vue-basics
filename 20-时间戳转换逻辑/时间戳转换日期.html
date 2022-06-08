@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时间戳转化时间</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  function format(data) {
+    function addZero(t){
+      return t < 10 ? '0'+ t : t
+    }
+    const timetype = new Date(data*1000)
+    console.log('timetype',timetype);
+    const y = timetype.getFullYear();
+    const m = timetype.getMonth() + 1;
+    const d = timetype.getDate();
+    const h = timetype.getHours();
+    const mm = timetype.getMinutes();
+    const ss = timetype.getSeconds();
+    return  y + '-' + addZero(m) + '-' + addZero(d) + ' ' + addZero(h) + ':' + addZero(mm) + ':' + addZero(ss)
+  }
+
+  console.log('format11',format(1631167603),10>10);
+  // console.log('format',format(1631167603 * 1000));
+</script>
+
+</html>

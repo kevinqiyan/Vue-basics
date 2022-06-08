@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冒泡排序</title>
+</head>
+
+<body>
+<div>
+    <h3>
+        <a href="https://www.cnblogs.com/ybygb-geng/p/9355425.html">js十大排序</a>
+    </h3>
+</div>
+</body>
+<script>
+    let nums = [2, 3, 1, 4, 5, 7, 10]
+    function MaoPao(array) {
+        for (let index = 0; index < array.length - 1; index++) {
+            const element = array[index];
+            // debugger
+            for (let j = 0; j < array.length - 1 - index; j++) {
+                const ele = array[j];
+                if (array[j] > array[index]) {
+                    let temp = array[index]
+                    array[j] = array[j + 1]
+                    array[j + 1] = temp
+                }
+            }
+        }
+    }
+    let result = MaoPao(nums)
+    console.log('result',result);
+</script>
+
+</html>

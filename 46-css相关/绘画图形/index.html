@@ -15,8 +15,20 @@
       <div id="two" class="public"></div>
     </div>
     <!-- 直角三角形 -->
-    <div id="thre"></div>
     <div id="thre1"></div>
+    <div id="thre2"></div>
+    <div id="thre"></div>
+    <div id="thre3"></div>
+    <div id="thre4"></div>
+
+    <!-- 拼接五边形 -->
+    <div id="five">
+      <div class="public" id="five1"></div>
+      <div class="public" id="five2"></div>
+      <div class="public" id="five3"></div>
+      <div class="public" id="five4"></div>
+      <div class="public" id="five5"></div>
+    </div>
   </div>
 </body>
 <style>
@@ -36,7 +48,9 @@
     border-left: 100px solid black;
     border-right:100px solid orange; */
   }
-
+  #content{
+    display: flex;
+  }
   #first {
     position: relative;
   }
@@ -54,7 +68,6 @@
     border-right: 100px solid transparent;
     border-bottom: 100px solid blue;
     border-left: 100px solid blue;
-    margin-left: 10px;
   }
   #thre1{
     width: 0px;
@@ -63,7 +76,39 @@
     border-right: 100px solid black;
     border-bottom: 100px solid transparent;
     border-left: 100px solid transparent;
-    margin-left: 10px;
+
+  }
+  #thre2{
+    width: 0px;
+    height: 0px;
+    border-top: 100px solid transparent;
+    border-right: 100px solid red;
+    border-bottom: 100px solid red;
+    border-left: 100px solid transparent;
+
+  }
+  #thre3{
+    width: 0px;
+    height: 0px;
+    border-top: 100px solid orange;
+    border-right: 100px solid transparent;
+    border-bottom: 100px solid transparent;
+    border-left: 100px solid orange;
+
+  }
+  #thre4{
+    width: 0px;
+    height: 0px;
+    border-top: 100px solid #FFFFFF;
+    border-right: 100px solid transparent;
+    border-bottom: 100px solid transparent;
+    border-left: 100px solid #FFFFFF;
+    transform: rotate(-45deg);
+    
+  }
+
+  #five{
+    position: relative;
   }
 </style>
 

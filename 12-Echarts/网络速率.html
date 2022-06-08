@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网络速率动态图</title>
+</head>
+
+<body>
+  <div id="main" style="width: 100%;height: 100%;" style="position: relative;overflow: hidden;">
+    <div id="button" style="width: 100px;height: 30px;text-align: center;">进行点击push数据</div>
+    <div id="top" style="width: 170px;height: 30px; margin-top: 20px;overflow: hidden;"></div>
+    <div style="width: 100%;height: 10px; background-color: rgb(188, 219, 253)"></div>
+    <div id="bottom" style="width: 170px;height: 30px;margin-top: 10px;"></div>
+  </div>
+</body>
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<script>
+  var topDom = document.getElementById('top')
+  var botDom = document.getElementById('bottom')
+  var button = document.getElementById('button')
+  var topChart = echarts.init(topDom)
+  var bottomChart = echarts.init(botDom)
+  var option
+  var option2
+  var base = +new Date(2014, 9, 3);
+  var oneDay = 24 * 3600 * 1000;
+
+  // 这两个是一组
+  var date = []
+  var data = [30, 12, 15, 16, 15, 20, 20, 20, 50, 49, 48, 77, 46, 48, 48, 30, 30, 32, 31, 30, 29, 28, 25, 24, 48, 48, 30, 32, 33, 32];
+
+
+  /* 
+  这两个是一组
+  var date = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,];
+  var data = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10] 
+  */
+
+  console.log('data.length', data.length, 'date.length', date.length);
+
+  var now = new Date(base);
+  var a = 0
+  function addData(shift) {
+    now = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/');
+    date.push(now);
+
+    data.push((Math.random() - 0.4) * 10 + data[data.length - 1]);
+    if (shift) {
+
+      date.shift(); // 从数组头部删除数据
+      data.shift();
+    }
+    now = new Date(+new Date(now) + oneDay);
+
+  }
+  for (var i = 1; i < 30; i++) {
+    pushData()
+  }
+
+  function pushData(shift) {
+    now = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/');
+    date.push(now);
+    data.push(randomNum(30, 50))
+    if (shift) {
+      date.shift(); // 从数组头部删除数据
+      data.shift();
+    }
+    now = new Date(+new Date(now) + oneDay);
+  }
+  function randomNum(minNum, maxNum) {
+    // console.log('arguments',arguments);
+    switch (arguments.length) {
+      case 1:
+        return parseInt(Math.random() * minNum + 1, 10);
+        break;
+      case 2:
+        return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+        break;
+      default:
+        return 0;
+        break;
+    }
+  }
+
+
+  button.addEventListener('click', () => {
+    // const arr = [10,12,15,16,15,20,44,20,50,49,48,47,46,48,48,30,30,32,31];
+    // data = data.concat(arr)
+
+    data.push(Math.ceil(Math.random() * 1))
+    // data.concat(data.filter(item=>item<=((Math.max(...data) - Math.min(...data))/2)?item+=((Math.max(...data) - Math.min(...data))/2):item)) 
+    // console.log('data',data);
+    // console.log('查看push后的数据是什么呢', data);
+    topChart.setOption({
+      xAxis: [{
+        data: date,
+        // gridIndex: 0,
+      }],
+      yAxis: {
+        data: data
+      },
+      series: [
+        {
+          name: '成交',
+          data: data,
+          // gridIndex: 0,
+        }
+      ]
+    });
+    data.shift()
+
+  })
+  option = {
+    xAxis:
+    {
+      type: 'category',
+      boundaryGap: false,
+      data: date,
+      show: false,
+    },
+    yAxis: {
+      boundaryGap: [0, '50%'],
+      type: 'value',
+      show: false,
+      // scale:true,
+      // inverse: false, // 坐标轴反转
+
+      max: function (value) {
+
+        if (value.max === 10) {
+          return value.max * 3
+        } else {
+          return value.max * 2
+        }
+
+      }
+
+    },
+    series: [
+      {
+        type: 'line',
+        smooth: false, // 是否平滑曲线显示
+        symbol: 'none', // 标记的图形（echarts 提供的标记类型） emptyCircle
+        stack: 'a',
+        areaStyle: {
+          color: "rgb(188, 219, 253)"
+        },
+        lineStyle: {
+          color: 'rgb(78, 159, 249)'
+        },
+        data: data,
+      }
+    ],
+    grid: {
+      left: '0%',
+      right: '0%',
+      top: 0,
+      bottom: 0,
+    },
+    // tooltip:{
+    //   transitionDuration:0,
+    // }
+  };
+  option2 = {
+    xAxis:
+    {
+      type: 'category',
+      boundaryGap: false,
+      data: date,
+      show: false,
+    },
+    yAxis: {
+      boundaryGap: [0, '50%'],
+      type: 'value',
+      show: false,
+      inverse: true, // 坐标轴反转
+
+      max: function (value) {
+        if (value.max === 10) {
+          return value.max * 3
+        } else {
+          return value.max * 2
+        }
+
+      }
+
+    },
+    series: [
+      {
+        type: 'line',
+        smooth: false, // 是否平滑曲线显示
+        symbol: 'none', // 标记的图形（echarts 提供的标记类型） emptyCircle
+        stack: 'a',
+        areaStyle: {
+          color: "rgb(182, 244, 225)"
+        },
+        lineStyle: {
+          color: 'rgb(6, 217, 153)'
+        },
+        data: data,
+      }
+    ],
+    grid: {
+      left: '0%',
+      right: '0%',
+      top: 0,
+      bottom: 0,
+    },
+  }
+  setInterval(function () {
+    pushData(true)
+    topChart.setOption({
+      xAxis: {
+        data: date,
+      },
+      series:
+      {
+        data: data,
+      }
+    });
+    bottomChart.setOption({
+      xAxis: {
+        data: date,
+      },
+      series:
+      {
+        // type:'line',
+        data: data,
+      }
+    });
+    // bottomChart.setOption({
+    //   xAxis: {
+    //     data: date,
+    //     show: false,
+    //   },
+    //   yAxis: {
+    //     inverse: true,
+    //     show: false,
+    //   },
+    //   series: [
+    //     {
+    //       name: '成交',
+    //       data: data,
+    //       type: 'line',
+    //       symbol: 'none',
+    //       stack: 'a',
+    //       areaStyle: {
+    //         normal: {}
+    //       },
+    //     }
+    //   ],
+    //   grid: {
+    //     left: '0%',
+    //     right: '0%',
+    //     top: 0,
+    //     bottom: 0
+    //   },
+    // });
+  }, 1000);
+
+  option && topChart.setOption(option);
+  option2 && bottomChart.setOption(option2);
+
+
+</script>
+
+</html>

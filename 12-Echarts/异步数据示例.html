@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="all">
+    <div id="main" style="width: 800px;height: 400px;">
+
+    </div>
+  </div>
+</body>
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<script>
+  var chartDom = document.getElementById('main');
+  var myChart = echarts.init(chartDom);
+  var option;
+
+  var base = +new Date(2014, 9, 3);
+  var oneDay = 24 * 3600 * 1000;
+  var date = [];
+  var data = [Math.random() * 150];
+  var now = new Date(base);
+  function addData(shift) {
+    now = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/');
+    date.push(now);
+    // data.push((Math.random() - 0.4) * 10 + data[data.length - 1]);
+    data.push(randomNum(30,40))
+    if (shift) {
+      date.shift();
+      data.shift();
+    }
+    now = new Date(+new Date(now) + oneDay);
+  }
+  for (var i = 1; i < 100; i++) {
+    addData();
+  }
+  option = {
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: date
+    },
+    yAxis: {
+      boundaryGap: [0, '50%'],
+      type: 'value'
+    },
+    series: [
+      {
+        name: '成交',
+        type: 'line',
+        smooth: false,
+        symbol: 'none',
+        stack: 'a',
+        areaStyle: {
+          normal: {}
+        },
+        data: data
+      }
+    ],
+    grid: {
+      left: '0%',
+      right: '0%',
+      top: 0,
+      bottom: 0
+    },
+  };
+  setInterval(function () {
+    addData(true);
+    myChart.setOption({
+      xAxis: {
+        data: date
+      },
+      series: [
+        {
+          name: '成交',
+          data: data
+        }
+      ]
+    });
+  }, 500);
+
+  function randomNum(minNum, maxNum) {
+    // console.log('arguments',arguments);
+    switch (arguments.length) {
+      case 1:
+        return parseInt(Math.random() * minNum + 1, 10);
+        break;
+      case 2:
+        return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+        break;
+      default:
+        return 0;
+        break;
+    }
+  }
+  option && myChart.setOption(option);
+
+</script>
+
+</html>

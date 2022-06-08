@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>datalist 标签</title>
+</head>
+
+<body>
+    <div id="main">
+        <!-- <label for="ice-cream-choice">Choose a flavor:</label> -->
+        <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
+
+        <datalist id="ice-cream-flavors">
+            <option value="Chocolate">
+            <option value="Coconut">
+            <option value="Mint">
+            <option value="Strawberry">
+            <option value="Vanilla">
+        </datalist>
+
+        <!-- optGroup -->
+        <label for="dino-select">Choose a dinosaur:</label>
+        <select>
+            <!-- <optgroup> -->
+                <option>Tyrannosaurus</option>
+                <option>Velociraptor</option>
+                <option>Deinonychus</option>
+            <!-- </optgroup> -->
+            <!-- <optgroup label="Sauropods">
+                <option>Diplodocus</option>
+                <option>Saltasaurus</option>
+                <option>Apatosaurus</option>
+            </optgroup> -->
+        </select>
+    </div>
+</body>
+<style>
+    #main {
+        width: 100%;
+        height: 100px;
+    }
+
+    /* #main>datalist{
+        width: 200px;
+        height: 20px;
+    } */
+</style>
+
+</html>

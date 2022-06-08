@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+  <title>wifi信号</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 240px;
+      height: 240px;
+      box-sizing: border-box;
+      position: relative;
+      margin: 100px auto;
+    }
+
+    .wifi-symbol {
+      width: 200px;
+      height: 200px;
+      margin-left: 18px;
+      box-sizing: border-box;
+      overflow: hidden;
+      transform: rotate(45deg);
+    }
+
+    .wifi-circle {
+      border: 10px solid #ccc;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .first {
+      width: 260px;
+      height: 260px;
+      top: 0;
+      left: 0;
+      animation: run1 4s linear infinite;
+    }
+
+    @keyframes run1 {
+      0% {
+        border-color: #ccc;
+      }
+
+      25% {
+        border-color: #ccc;
+      }
+
+      50% {
+        border-color: #ccc;
+      }
+
+      75% {
+        border-color: #ccc;
+      }
+
+      100% {
+        border-color: #97a8e6;
+      }
+    }
+
+    .second {
+      width: 200px;
+      height: 200px;
+      top: 60px;
+      left: 60px;
+      animation: run2 4s linear infinite;
+    }
+
+    @keyframes run2 {
+      0% {
+        border-color: #ccc;
+      }
+
+      25% {
+        border-color: #ccc;
+      }
+
+      50% {
+        border-color: #ccc;
+      }
+
+      75% {
+        border-color: #97a8e6;
+      }
+
+      100% {
+        border-color: #ccc;
+      }
+    }
+
+    .third {
+      width: 140px;
+      height: 140px;
+      top: 120px;
+      left: 120px;
+      animation: run3 4s linear infinite;
+    }
+
+    @keyframes run3 {
+      0% {
+        border-color: #ccc;
+      }
+
+      25% {
+        border-color: #ccc;
+      }
+
+      50% {
+        border-color: #97a8e6;
+      }
+
+      75% {
+        border-color: #ccc;
+      }
+
+      100% {
+        border-color: #ccc;
+      }
+    }
+
+    .fourth {
+      width: 20px;
+      height: 20px;
+      background: #ccc;
+      top: 180px;
+      left: 180px;
+      animation: run4 4s linear infinite;
+    }
+
+    @keyframes run4 {
+      0% {
+        background: #ccc;
+        border-color: #ccc;
+      }
+
+      25% {
+        background: #97a8e6;
+        border-color: #97a8e6;
+      }
+
+      50% {
+        background: #ccc;
+        border-color: #ccc;
+      }
+
+      75% {
+        background: #ccc;
+        border-color: #ccc;
+      }
+
+      100% {
+        background: #ccc;
+        border-color: #ccc;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="wifi-symbol">
+      <p class="wifi-circle first"></p>
+      <p class="wifi-circle second"></p>
+      <p class="wifi-circle third"></p>
+      <p class="wifi-circle fourth"></p>
+    </div>
+  </div>
+</body>
+
+</html>

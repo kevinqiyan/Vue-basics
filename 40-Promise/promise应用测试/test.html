@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>promise应用-ajax</title>
+</head>
+<body>
+  <div>
+
+  </div>
+</body>
+<script>
+function ajax(url){
+  return new Promise((res,rej)=>{
+    fetch(url).then(res => {return res.json()}).then(data=> console.log('data',data)).catch(err=>console.log(err))
+  })
+}
+
+window.onload = ()=>{
+  ajax('www.baidu.com').then((res)=>console.log('打印请求成功的数据是什么', res)).catch(err=>console.log('打印失败的数据是什么',err.message))
+}
+</script>
+</html>

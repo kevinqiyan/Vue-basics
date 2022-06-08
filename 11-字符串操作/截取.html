@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串截取并push到数组中</title>
+</head>
+<body>
+  
+</body>
+<script>
+  var str = '1,2,3,4,5,6,7,8'
+  str = '1'
+  str = ''
+  var arr = []
+  // arr.push(obj.name = str.split(','))
+  for (let index = 0; index < str.split(',').length; index++) {
+    const element = str.split(',')[index];
+    if (str.split(',')[index]) {
+      console.log('true', true);
+    }else{
+      console.log('false',false);
+    }
+    console.log(element,'elementelement');
+    let obj = {name:''}
+    obj.name = element
+    arr.push(obj)
+  }
+  console.log(arr);
+</script>
+</html>

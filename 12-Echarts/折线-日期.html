@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>折线图练习</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #main {
+        width: 400px;
+        height: 400px;
+        margin: 200px auto 0;
+        position: relative;
+    }
+
+    #one {
+        width: 232px;
+        height: 92px;
+        /* width: 400px;
+        height: 400px; */
+        border-bottom: 1px solid rgba(51, 94, 255, 0.2);
+        /* border-left: 1px solid red; */
+    }
+
+    .line {
+        width: 232px;
+        border: 1px dashed rgba(51, 94, 255, 0.2);
+        position: absolute;
+        left: 0px;
+        z-index: -1;
+    }
+
+    .first {
+        top: 30px;
+    }
+
+    .second {
+        top: 60px;
+    }
+</style>
+
+<body>
+    <div id="main">
+        <div
+            style="width: 85px;height: 24px;background: #fff;box-shadow: 0px 8px 10px 1px rgba(51, 64, 81, 0.06);border: 1px solid #EFEFEF;text-align: center;line-height: 24px;font-size: 12px;font-family: Microsoft YaHei-Regular, Microsoft YaHei;position: relative;">
+            <span style="color: #666666;">13次</span>
+            <span style="color: #999999;">12/24</span>
+            <div style="width: 0px;
+            height: 0px;
+            border-top: 1px solid #EFEFEF;
+            border-right: 6px solid white;
+            border-bottom: 6px solid white;
+            border-left: 1px solid #EFEFEF;
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 8px;
+            left: -3px;
+            "></div>
+        </div>
+        <div id="one"></div>
+        <div class="line first"></div>
+        <div class="line second"></div>
+    </div>
+</body>
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<script>
+    let myChart = document.getElementById('one')
+    let initChart = echarts.init(myChart)
+    let option;
+    let xData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+    let yData = [0, 2, 8, 3, 9, 2, 4, 6, 3, 1, 1, 2, 8, 3, 9, 2, 4, 6, 3, 2, 0, 2, 8, 3, 9, 2, 4, 6, 3, 1,]
+    // let yData = [0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+
+    option = {
+        xAxis: [{
+            data: xData,
+            show: false,
+            type: 'category',
+        }],
+        yAxis: [{
+            show: false,
+            type: 'value'
+        }],
+        tooltip: {
+            backgroundColor: 'transparent',
+            formatter(params) {
+                // return "x轴" + params.name + '        ' + "y轴" + params.value width: 85px;height: 24px;
+                let result = `<div style="width: 100%;height: 100%;;background: #fff;box-shadow: 0px 8px 10px 1px rgba(51, 64, 81, 0.06);border: 1px solid #EFEFEF;text-align: center;line-height: 24px;font-size: 12px;font-family: Microsoft YaHei-Regular, Microsoft YaHei;position: relative;">
+                    <span style="color: #666666;margin-left:6px">${params.name}&nbsp;</span>
+                    <span style="color: #999999;margin-right:8px">${params.value}</span>
+                    <div style="width: 0px;height: 0px;border-top: 1px solid #EFEFEF;border-right: 6px solid white;border-bottom: 6px solid white;border-left: 1px solid #EFEFEF;transform: rotate(-45deg);position: absolute;top: 8px;left: -3px;"></div>
+                </div>`
+                return result
+
+            },
+        },
+        series: [
+            {
+                data: yData,
+                type: 'line',
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(51, 94, 255, 0.15)'
+                        }, {
+                            offset: 1,
+                            color: 'rgba(51, 94, 255, 0)'
+                        }])
+                    }
+                },
+                symbolSize: 4,
+                showSymbol: true,
+                itemStyle: {
+                    normal: {
+                        color: '#7EA5FF'
+                    }
+                },
+                smooth: false,
+                // max: function (value) {
+                //     return value.max * 2
+                // },
+                lineStyle: {
+                    // color: 'linear-gradient(180deg, rgba(51, 94, 255, 0.15) 0%, rgba(51, 94, 255, 0) 100%)',
+                    color: 'rgb(154, 196, 255)',
+                    width: 1,
+                    // shadowColor:'linear-gradient(180deg, rgba(51, 94, 255, 0.15) 0%, rgba(51, 94, 255, 0) 100%)',
+                },
+                min: 'dataMin'
+            },
+
+        ],
+        grid: {
+            left: '0%',
+            right: '0%',
+            top: 2,
+            bottom: 2,
+        },
+    }
+    option && initChart.setOption(option)
+</script>
+
+</html>

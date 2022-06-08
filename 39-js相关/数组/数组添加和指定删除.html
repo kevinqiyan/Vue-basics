@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组的过滤和删除</title>
+</head>
+<body>
+  <div id="contain">
+    <button id="add">添加</button>
+    <button id="dele">删除</button>
+  </div>
+</body>
+<script>
+  let arr = [1,2,3,4,5,6,7]
+  let a = 0
+  let b = 2
+  function addFun(){
+    // a = a+1
+    arr.push(a)
+  }
+  console.log('arr',arr);
+
+  function deleFun(){
+    // for (let index = 0; index < arr.length; index++) {
+    //   const element = arr[index];
+    //   if (element === b) {
+    //     arr.splice(element,1)
+    //   }
+    // }
+  arr.filter((item,index)=>{
+     if (item === b) {
+       console.log('index',index);
+       arr.splice(index,1)
+     }
+    })
+  }
+
+  var add = document.getElementById('add')
+  var dele = document.getElementById('dele')
+  add.addEventListener('click',()=>{
+    addFun();
+    console.log('arradd',arr);
+  })
+  dele.addEventListener('click',()=>{
+    deleFun()
+    console.log('arrdele',arr);
+  })
+</script>
+</html>

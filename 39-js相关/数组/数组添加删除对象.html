@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组添加删除对象</title>
+</head>
+<body>
+  <div id="content">
+    <button id="add">点击添加数据</button>
+  </div>
+</body>
+<script>
+  var add = document.getElementById('add')
+  let array = []
+  let ids = 1
+  let stus = 0
+  // let testObject = {
+  //   id:ids,
+  //   status:stus
+  // }
+  let testObject = function(id){
+    this.id = id
+  }
+  testObject.create = function(id){
+     return new testObject(id)
+  }
+
+  add.addEventListener('click',()=>{
+    ids = ids+1
+    array.push(testObject.create(ids))
+    console.log('array', array);
+    // console.log(ids,testObject.id,'查看数组数据', array);
+  })
+
+</script>
+</html>

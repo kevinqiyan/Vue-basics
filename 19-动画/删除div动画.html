@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>删除动画</title>
+</head>
+
+<body>
+  <div id="main">
+    <div><button>删除</button></div>
+    <div id="content" style="width: 450px;height: 600px;overflow: hidden;">
+      <ul style="width:375px;height: 100%;overflow-y: auto;">
+        <li v-for="(item, index) in num" :key="index"
+          style="height: 20px;line-height: 20px;background-color: #bbffaa;margin-top: 10px;" @click="dele(item,index)"
+          :class="testIndex == index ? active :''">{{item}}</li>
+      </ul>
+    </div>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#main',
+    data() {
+      return {
+        testIndex: -1,
+        active: 'active',
+        num: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+      }
+    },
+    methods: {
+      dele(item, index) {
+        this.testIndex = index
+        // console.log(this.testIndex, '点击了删除按钮', index);
+        setTimeout(() => {
+          this.num.splice(index,1)
+          this.testIndex = -1
+        }, 1000);
+      }
+    },
+  })
+</script>
+<style>
+  ul,
+  li {
+    list-style: none;
+    transition: transform 2s;
+    transition-duration: 2;
+    /* transform: translateY(-10px); */
+  }
+
+  li {
+    position: relative;
+    /* transition: all 1s cubic-bezier(.17,.17,0.42,1); */
+    /* transition: all 2s; */
+    animation: linear;
+  }
+
+  .active {
+    /* animation: test linear infinite 3s; */
+    /* position: relative;
+    left: -200px; */
+    /* transition: all 1s cubic-bezier(.17,.17,0.42,1); */
+    animation: test linear 1s;
+  }
+
+  @keyframes test {
+    0% {
+      opacity: 0.4;
+      transform: translate(-112px, 0);
+    }
+
+    10%{
+      opacity: 0.1;
+    }
+
+    20%{
+      opacity: 0;
+    }
+
+    25% {
+      opacity: 0;
+      transform: translate(-224px, 0);
+    }
+
+    50% {
+      opacity: 0;
+      transform: translate(-336px, 0);
+    }
+
+    75% {
+      /* opacity: 0.2; */
+      opacity: 0;
+      transform: translate(-448px, 0);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate(-560px, 0);
+    }
+  }
+</style>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>状态切换</title>
+</head>
+
+<body>
+  <div id="checkModel">
+    <div style="width: 154px;height: 26px;background: #F6F6F6;border-radius: 16px;" class="content">
+      <span>养护</span>
+      <span id="active">常规</span>
+      <span>快充</span>
+
+      <div class="tips">
+
+      </div>
+    </div>
+  </div>
+</body>
+<style>
+  .content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+  }
+  .content span {
+    width: 50px;
+    height: 24px;
+    line-height: 24px;
+    /* background: linear-gradient(135deg, #657FFF 0%, #335EFF 100%); */
+    border-radius: 14px;
+    color: #999999;
+    font-size: 12px;
+    font-family: MicrosoftYaHei;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  #active {
+    width: 50px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;
+    background: linear-gradient(135deg, #657FFF 0%, #335EFF 100%);
+  }
+  .tips{
+    position: absolute;
+    z-index: 5;
+    top: 10px;
+    left: 30px;
+    width: 100px;
+    height: 30px;
+    background-color: #bbffaa;
+  }
+</style>
+
+</html>
