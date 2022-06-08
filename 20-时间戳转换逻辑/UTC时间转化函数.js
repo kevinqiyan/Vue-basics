@@ -72,4 +72,9 @@ function formateDate(date) {
     }
 //   console.log(formateDate('2021-04-07T02:00:37.760Z'));
 //   console.log(formatUTC('2021-04-07T02:00:37.760Z'));
-  console.log(timeChange('2021-04-07T10:00:37.760Z'));
+console.log(timeChange('2021-04-07T10:00:37.760Z'));
+  
+function renderTime(date) {
+  var dateee = new Date(date).toJSON();
+  return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+}
