@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <button @click="createModal(true)">弹窗</button>
+        <div class="mode" v-show="isShow">
+            <div class="footer">
+
+                <button @click='yesClick'>关闭</button>
+                <button @click='noClic'>确认</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#box',
+        props:['confrim'],
+        data() {
+            return {
+                isShow:false
+            }
+        },
+        methods: {
+            createModal(params){
+                this.isShow = params
+            },
+            yesClick(){
+                this.$emit('confrim','yes')
+                createModal(false)
+            },
+            noClic(){
+                this.$emit('confrim','no')
+                createModal(false)
+            }
+        },
+    })
+</script>
+</html>

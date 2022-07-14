@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //  原型链继承
+function parent() {
+    this.name = 'parent-name'
+    this.play = [1,2,3]
+}
+
+function child() {
+    this.type = 'child-1'
+}
+
+child.prototype = new parent()
+let a = new child()
+// console.log('a', a.name,);
+
+// 构造函数继承
+/* 
+ 只能继承 父类的实例属性和方法，不能继承原型属性或者方法
+*/
+function parent2() {
+    this.name = 'parent-222'
+}
+
+parent2.prototype.getName = function () {
+    return this.name
+}
+
+function child2() {
+    parent2.call(this)
+}
+
+let b = new child2()
+// console.log('b',b, b.getName()); // b.getName() 会报错，因为并没有继承父类的原型
+
+// 组合继承（前两种的组合）
+
+/* 
+    多构造一次就多进行了一次性能开销
+*/
+function parent3(){
+    this.name = 'parent---333'
+}
+
+parent3.prototype.getName = function(){
+    return this.name
+}
+
+function child3(){
+    this.type = 'child--333'
+    parent3.call(this)
+}
+// 挂载到原型链
+child3.prototype =  new parent3()
+// 手动挂载构造器，指向自己的构造器
+child3.prototype.constructor = child3
+let c = new child3()
+// console.log('ccc',c);
+// console.log('c.type',c.type);
+
+// 原型式继承
+
+/* 
+ 采用的 Object.create 方法，这个方法接收两个参数：一个是用作新对象原型的对象、二是为新对象定义额外属性的对象（可选参数）
+*/
+let parent4 = {
+    name: 'parent-444',
+    friend: [1,2,3,4],
+    getName: function(){
+        return this.name
+    }
+}
+
+let person = Object.create(parent4)
+person.name = 'kevin_test'
+person.friend.push('test')
+
+let person2 = Object.create(parent4)
+person2.friend.push('test-2')
+
+console.log('person',person);
+console.log('person-2',person2);
+console.log('person-type', person.name === person.getName());
+
+console.log('person-log',person.friend);
+console.log('person2-log',person2.friend);
+
+
+
+</script>
+</html>
