@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包</title>
+</head>
+<body>
+    <div>
+        <h3></h3>
+        <button class="btn">添加</button>
+        
+    </div>
+</body>
+<script>
+    /* 
+    闭包是一种保护私有变量的机制，在函数执行时形成私有的作用域，保护里面的私有变量不受外界干扰。直观的说就是形成一个不销毁的栈环境。
+    
+    
+    */
+    var btn = document.querySelector('.btn')
+    var txt = document.querySelector('h3')
+    btn.addEventListener('click',()=>{
+        txt.innerText = add()
+    })
+
+    var add = function (){
+        let count = 0
+        return function(){
+            return count +=1
+        }
+
+    }()
+   
+    
+</script>
+</html>

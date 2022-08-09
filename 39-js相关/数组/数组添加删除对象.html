@@ -8,10 +8,13 @@
 <body>
   <div id="content">
     <button id="add">点击添加数据</button>
+    <h2>数组数据显示</h2>
+    <p id="list"></p>
   </div>
 </body>
 <script>
   var add = document.getElementById('add')
+  var list = document.getElementById('list')
   let array = []
   let ids = 1
   let stus = 0
@@ -27,9 +30,13 @@
   }
 
   add.addEventListener('click',()=>{
+    
     ids = ids+1
     array.push(testObject.create(ids))
     console.log('array', array);
+    let li = document.createElement('li')
+    li.textContent = ids
+    list.appendChild(li)
     // console.log(ids,testObject.id,'查看数组数据', array);
   })
 

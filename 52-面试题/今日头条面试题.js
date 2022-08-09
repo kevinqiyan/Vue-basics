@@ -1,7 +1,7 @@
 async function async1() {
     console.log('async1 start') //2
     await async2() //3
-    console.log('async1 end') //5
+    console.log('async1 end') //6
  }
  async function async2() {
     console.log('async2') //3
@@ -12,7 +12,7 @@ async function async1() {
 
 
  setTimeout(function () {
-    console.log('settimeout')
+    console.log('settimeout')//8
  })
 
 
@@ -20,11 +20,11 @@ async function async1() {
 
 
  new Promise(function (resolve) {
-    console.log('promise1')
+    console.log('promise1') //4
     resolve()
  }).then(function () {
-    console.log('promise2') //
+    console.log('promise2') // 7
  })
 
 
- console.log('script end')
+ console.log('script end') //5

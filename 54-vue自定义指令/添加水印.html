@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令-添加水印</title>
+</head>
+<body>
+    <div id="box">
+        <div v-wart></div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+new Vue({
+    el:'#box',
+    directives:{
+        wart:{
+            inserted: function(el,binding){
+                this.addWart(binding.value.text,el,binding.value.font,binding.value.textColor)
+
+            }
+        }
+    },
+
+    
+    data() {
+        return {
+            
+        }
+    },
+    methods: {
+        
+        addWart(str,parentNode,font,textColor){
+            var can = document.createElement('canvas')
+            parentNode.appendChild(can)
+            can.width = 200
+            can.height = 150
+            can.style.display = 'none'
+            var cans = can.gerContext('2d')
+            cans.rotate((-20 * Math.PI) / 180)
+            cans.font = font || 'rgba(180,180,180,0.3)'
+            cans.textAlign = 'left'
+            cans.textBaseline = 'Middke'
+            cans.fillText(str,can.width / 10, can.height / 2)
+            parentNode.style.backgroundImage = 'url( '+ can.toDataURL("image/png") +' )'
+
+        }
+    },
+})
+</script>
+</html>
