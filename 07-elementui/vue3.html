@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/element-plus@2.2.12/dist/index.css" />
+    <title>vue3_elementPlus</title>
+</head>
+
+<body>
+    <div id="app">
+        <el-button @click="add">{{count}}</el-button>
+
+    </div>
+</body>
+<!-- vue3 -->
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/element-plus@2.2.12/dist/index.full.js"></script>
+
+<script>
+    const { ref, reactive, onMounted, createApp } = Vue
+    createApp({
+        setup(props) {
+            const count = ref(0)
+            const add = () => {
+                count.value++
+                fetch('http://localhost:3000/test')
+                .then(res => res.json())
+                .then(data =>  console.log('返回的数据是什么',data))
+            }
+            onMounted(() => {
+                console.log('22222222222222');
+            })
+            return {
+                count,
+                add,
+            }
+           
+        },
+      
+
+    }).use(ElementPlus).mount("#app")
+    
+</script>
+
+</html>
