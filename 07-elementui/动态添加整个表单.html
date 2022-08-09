@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态表单-整个</title>
+</head>
+<body>
+    <div id="box">
+        <el-button @click="add">点击添加</el-button>
+        <el-button @click="getInfo">获取当前list</el-button>
+        <div class="item" v-for= '(item,index) in itemList' :key='index' label-width="100px" >
+            <el-button @click="remove(item)">删除</el-button>
+            <el-form :model="item.form">
+                <el-form-item label="名称">
+                    <el-input placeholder="请输入测试" v-model="item.form.name"></el-input>
+                </el-form-item>
+                <el-form-item label="年龄">
+                    <el-input placeholder="请输入测试" v-model="item.form.age"></el-input>
+                </el-form-item>
+                <el-form-item label="体重">
+                    <el-input placeholder="请输入测试" v-model="item.form.weight"></el-input>
+                </el-form-item>
+                <el-form-item label="性别">
+                    <el-input placeholder="请输入测试" v-model="item.form.sex"></el-input>
+                </el-form-item>
+                <el-form-item label="爱好">
+                    <el-input placeholder="请输入测试" v-model="item.form.like"></el-input>
+                </el-form-item>
+            </el-form>
+        </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+new Vue({
+    data() {
+        return {
+            itemList:[{
+                form:{
+
+                }
+            }]
+        }
+    },
+    methods: {
+        add(){
+            if(this.itemList.length === 5 ) return
+            this.itemList.push({form:{}})
+            console.log('获取当前长度', this.itemList.length);
+            
+        },
+        getInfo(){
+            console.log('获取当前的数据',this.itemList);
+        },
+        remove(item){
+            let index = this.itemList.indexOf(item)
+            if(this.itemList.length === 1) return
+            if(index !== -1) this.itemList.splice(index, 1)
+        }
+    },
+}).$mount("#box")
+</script>
+</html>
