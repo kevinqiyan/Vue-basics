@@ -11,7 +11,10 @@
 
 <body>
     <div id="app">
+        <p>验证码：{{imgTxt}}</p>
+        <p v-html="imgHtml">{{imgHtml}}</p>
         <el-button @click="add">{{count}}</el-button>
+        <el-button @click="getInfo">验证码请求</el-button>
 
     </div>
 </body>
@@ -24,18 +27,29 @@
     createApp({
         setup(props) {
             const count = ref(0)
+            const imgTxt = ref('')
+            const imgHtml = ref(null)
             const add = () => {
                 count.value++
                 fetch('http://localhost:3000/test')
                 .then(res => res.json())
                 .then(data =>  console.log('返回的数据是什么',data))
             }
-            onMounted(() => {
-                console.log('22222222222222');
-            })
+            const getInfo = () => {
+                fetch('http://localhost:3000/getInfo')
+                .then(res => res.json())
+                .then(data => {
+                    console.log('imgTxt',imgTxt)
+                    imgTxt.value = data.text
+                    imgHtml.value = data.data
+                })
+            }
             return {
                 count,
                 add,
+                imgTxt,
+                imgHtml,
+                getInfo
             }
            
         },

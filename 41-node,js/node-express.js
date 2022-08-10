@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const svgCaptcha = require('svg-captcha')
 const app = express()
 
 app.use(cors())
@@ -12,6 +13,18 @@ app.get('/test', (req, res) => {
         data: body,
         message: '请求成功'
     })
+})
+
+// 获取验证码
+app.get('/getInfo', (req, res) => {
+    const c = svgCaptcha.create({
+        size: 4, // 验证码的长度
+        ignoreChars: '0o1i', // 排除字符
+        color: true,
+        noise: 1, // 干扰线
+        background: '#ccc', // 北京颜色
+    })
+    res.send(c)
 })
 
 app.listen(3000, () => {
