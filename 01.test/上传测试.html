@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <button @click="up">上传</button>
+        <input type="file" ref="file" accept=".jpeg, .png" style="display: none;" @change="changeFile">
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+new Vue({
+    el: '#box',
+    data() {
+        return {
+            
+        }
+    },
+    methods: {
+        up(){
+            this.$refs.file.click()
+        },
+        changeFile(e){
+            let file = e.target.files[0]
+            console.log('2222222222222',file);
+            let formData = new FormData()
+            formData.append('file',file)
+            console.log('33333333333333333', formData);
+        }
+    },
+})
+</script>
+</html>
