@@ -34,10 +34,34 @@
             </el-table-column>
       </el-table>
         </div>
+        <div class="box">
+            <el-row>
+                <el-col :span="8">
+                    <el-table border>
+                        <el-table-column label="第一层次股东"></el-table-column>
+                        <el-table-column label="股份占比"></el-table-column>
+                    </el-table>
+                </el-col>
+                <el-col :span="8">
+                    <el-table border>
+                        <el-table-column label="第二层次股东"></el-table-column>
+                        <el-table-column label="股份占比"></el-table-column>
+                    </el-table>
+                </el-col>
+                <el-col :span="8">
+                    <el-table border>
+                        <el-table-column label="第三层次股东"></el-table-column>
+                        <el-table-column label="股份占比"></el-table-column>
+                        <el-table-column label="围股占比"></el-table-column>
+                    </el-table>
+                </el-col>
+            </el-row>
+        </div>
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<!-- <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
 <script>
     new Vue({
         el:'#box',

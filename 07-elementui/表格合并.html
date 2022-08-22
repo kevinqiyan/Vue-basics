@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格列合并</title>
+</head>
+
+<body>
+    <div id="box">
+        <el-table
+      border
+      style="margin-top: 50px"
+      :data="transData"
+      :span-method="objectSpanMethod"
+      :header-cell-style="headFirst"
+      :cell-style="headFirst_col"
+    >
+      <el-table-column
+        v-for="(item, index) in transTitle"
+        :label="item"
+        :key="index"
+        align="center"
+        :fixed="index == 0 || index == 1"
+      >
+        <template slot-scope="scope">{{ scope.row[index] }}</template>
+      </el-table-column>
+    </el-table>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+
+</html>
