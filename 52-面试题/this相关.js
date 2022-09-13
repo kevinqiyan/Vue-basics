@@ -11,8 +11,8 @@ var obj = {
         console.log('two',this.a);
     }
 }
-// obj.one()
-// obj.two()
+obj.one()
+obj.two()
 
 // 2022年7月1日面试题
 
@@ -101,9 +101,19 @@ function B() {
     this.age = 20
 }
 
-A().getName() // 张三
-A().getAge() // 10
-B()
-B().getName() // undefined
-B.getAge() // undefined
+// A().getName() // 张三
+// A().getAge() // 10
+// B()
+// B().getName() // undefined
+// B.getAge() // undefined
+
+function get() {
+    B()
+    let name = '12'
+    function B() {
+        // console.log('111', this.name);
+        console.log('222',name);
+    }
+}
+get()
 

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自测test</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // var str = '     '
+// if (str.trim()) {
+//   console.log('true',str);
+// } else {
+//   console.log('false');
+// }
+
+//  自测
+
+let test = {
+
+  c: this, // window
+  a :() => {
+    console.log('this 1-2', this); // window
+    setTimeout(() => {
+      console.log('this 1-2-1', this); // window
+    }, 0);
+  },
+  b : function() {
+    console.log('this 1-3', this); // Object - test
+    setTimeout(() => {
+      console.log('this 1-3-1', this); // Object - test
+    }, 0);
+  }
+}
+// console.log('ccc',test.c);
+// test.a()
+// test.b()
+
+// Promise
+(
+    function () {
+        let PENDING = 'pending'
+        let RESOLVE = 'resolve'
+        let REJECT = 'reject'
+        function Promise(params) {
+            let self = this
+            self.data = undefined
+            self.callback = []
+            self.status = PENDING
+            
+            function resolve(value) {
+                if (self.status === PENDING) {
+                    self.status = RESOLVE
+                    self.data = value
+                    if (self.callback.length > 0) {
+                        self.callback.forEach(element => element.onResolved(value));
+                    }
+                }
+            }
+
+            function reject(value) {
+                if (self.status === PENDING) {
+                    self.status = REJECT
+                    self.data = value
+                    if (self.callback.length > 0) {
+                        self.callback.forEach(element => element.onRejected(value));
+                    }
+                }
+            }
+
+            try {
+                params(resolve,reject)
+            } catch (error) {
+                reject(error)
+            }
+        }
+    }
+)(window)
+
+
+
+
+
+
+</script>
+</html>

@@ -35,6 +35,7 @@
         }
       }
     }
+    constitution(resolve, reject)
   }
 
   Promise.prototype.then = function (onResolve, onReject) {
@@ -70,12 +71,12 @@
         setTimeout(() => {
           resolvePromise(onResolve)
         }, 0);
-      } else if(self.status === onReject){
+      } else if (self.status === onReject) {
         setTimeout(() => {
           resolvePromise(onReject)
         }, 0);
       } else {
-        self.callback({onResolve(value){resolvePromise(onResolve)},onReject(value){resolvePromise(onReject)}})
+        self.callback({ onResolve(value) { resolvePromise(onResolve) }, onReject(value) { resolvePromise(onReject) } })
       }
     })
   }
@@ -92,11 +93,11 @@
         try {
           const result = callbacks(self.data)
           if (result instanceof Promise) {
-            result.then(resolve,reject)
+            result.then(resolve, reject)
           } else if (typeof result === 'function' && typeof result === 'object' && result !== null) {
             const then = result.then
             if (typeof then === 'function') {
-              then(resolve,reject)
+              then(resolve, reject)
             } else {
               resolve(then)
             }

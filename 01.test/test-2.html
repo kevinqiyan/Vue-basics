@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <header>查询</header>
+        <main>
+            <div>
+                <h3>数据展示 - {{phoneNum}}</h3>
+                <input type="text" v-model="this.dataFomat(phoneNum)">
+            </div>
+            <div>
+                <h3>发送数据</h3>
+                <button @click="postData">请求</button>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el: '#box',
+        data() {
+            return {
+                phoneNum: 13800000001,
+                id: '',
+            }
+        },
+        created() {
+            // this.dataFomat(this.phoneNum)
+        },
+        methods: {
+            // 数据展示处理
+            dataFomat(nub) {
+                if (!nub) return false
+                let para = nub.toString()
+                let result;
+                result = para.slice(0, 3) + '****' + para.slice(para.length - 4, para.length)
+                console.log('result', result);
+                return result
+
+            },
+            // 请求接口
+            postData() {
+                if (!(this.id || this.phoneNum)) {
+                    return alert('请输入登录ID 或 用户手机号')
+                }
+                let para = {
+                    LoginID: this.id,
+                    phoneNum: this.phoneNum
+                }
+                axios.post('api', para).then((result) => {
+                    if (result.code == 200) {
+                        let data = result.data
+                    }
+                }).catch((err) => {
+                    console.log('error');
+                });
+            }
+        },
+    })
+</script>
+
+</html>

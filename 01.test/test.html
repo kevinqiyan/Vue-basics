@@ -33,8 +33,15 @@
     new Vue({
         el:'#test',
         data:{
-            msg:"kevin"
-        }
+            msg:"kevin",
+            obj: {}
+        },
+        mounted() {
+             this.$set(this.obj,'name','张三')
+            console.log('obj',this.obj);
+            delete obj.name
+            console.log('obj  1-1',this.obj);
+        },
     })
 </script>
 </html>

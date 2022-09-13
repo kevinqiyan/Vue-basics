@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现一个双向绑定</title>
+</head>
+<body>
+    <div id="box">
+        <input id="box">
+        <input id="box1">
+    </div>
+</body>
+<script>
+    const input = document.getElementById('box')
+    const one = document.getElementById('box1')
+    const btn = document.getElementById('btn')
+    const data = {}
+    const data2 = {}
+    const handler = {
+        get: function(target,key){
+            return target[key]
+        },
+        set: function(target,key,value){
+            if (key === 'text' && value) {
+                one.innerHTML = value
+                return (target[key] = value)
+            }
+        }
+    }
+
+    const inputProxy = new Proxy(data2,handler)
+    
+
+    Object.defineProperty(data,'text',{
+        set(value){
+            this.value = value
+            input.value = value
+        }
+    })
+
+    input.onchange = function(e){
+        data.text = e.target.value
+        console.log('input',data);
+    }
+    one.onchange = function(e){
+        inputProxy.text = e.target.value
+        console.log('inputProxy.text',inputProxy.text);
+    }
+    
+</script>
+</html>

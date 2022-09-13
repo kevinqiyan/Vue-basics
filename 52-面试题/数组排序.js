@@ -14,10 +14,10 @@ const source = [
 function filterSort(arr) {
     // 写下你的代码   
     let listArr = []
-    let list =  arr.filter(value => {
+    let list = arr.filter(value => {
         return (typeof value.id) === 'number'
     })
-    list.sort((a,b) => {
+    list.sort((a, b) => {
         return a.id - b.id
     })
     list.forEach(element => {
@@ -26,5 +26,5 @@ function filterSort(arr) {
     return listArr
 }
 
-console.log('过滤数据',filterSort(source));
+console.log('过滤数据', filterSort(source));
 
