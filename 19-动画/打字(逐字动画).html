@@ -20,7 +20,7 @@
   function writing(){
     if(index < data.length){
       contain.innerHTML += data[index]
-      setTimeout(writing.bind(this), 200, ++index);
+      // setTimeout(writing.bind(this), 200, ++index);
       console.log(index,'index');
     }else{
       index = 0
@@ -28,6 +28,7 @@
       contain.innerHTML = ''
       // setTimeout(writing.bind(this), 200, ++index);
     }
+    setTimeout(writing.bind(this), 200, ++index);
   }
   writing()
 </script>

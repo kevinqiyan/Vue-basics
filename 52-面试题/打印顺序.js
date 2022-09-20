@@ -24,10 +24,35 @@
         console.log(22);
     }, 0);
     new Promise((resolve, reject) => {
-        resolve()
+        // resolve()
         console.log(33);
+        reject()
     }).then(() => {
         console.log(44);
+    }).catch(() => {
+        console.log(66);
     })
     console.log(55);
 })()
+
+// 方圆奇正
+// test()
+// test2()
+// test4()
+// console.log('test 333');
+// function test() {
+//     setTimeout(() => {
+//         console.log('test 111');
+//     }, 10);
+// }
+
+// function test2() {
+//     setTimeout(() => {
+//         console.log('test 222');
+//     }, 2);
+// }
+
+// function test4() {
+//     console.log('test 4444');
+//     return '44444'
+// }
