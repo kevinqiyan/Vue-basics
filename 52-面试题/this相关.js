@@ -11,8 +11,8 @@ var obj = {
         console.log('two',this.a);
     }
 }
-obj.one()
-obj.two()
+obj.one() // window undefined
+obj.two() // obj对象 3
 
 // 2022年7月1日面试题
 
@@ -112,7 +112,7 @@ function get() {
     let name = '12'
     function B() {
         // console.log('111', this.name);
-        console.log('222',name);
+        // console.log('222',name);
     }
 }
 get()
