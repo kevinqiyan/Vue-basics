@@ -13,6 +13,7 @@
 // ==/UserScript==
 /* jshint esversion: 6 */
 
+// 添加倍速播放
 (
     function () {
         var href = window.location.href
@@ -39,12 +40,11 @@
                     const nextUrl = `https://${window.location.host}${window.location.pathname}?teachPlanId=${params.teachPlanId}&periodId=${params.periodId}&courseId=${courseId}&nodeId=${nextKey}`
                         console.log('下一个视频的链接_查找视频',nextUrl);
                     location.replace(nextUrl)
-                }
+                } 
                 createHTML()
                 addStyle()
                 // 获取播放速度参数
                 let speedData = GM_getValue('Speed')
-                console.log('获取播放速度参数',speedData)
                 if (speedData) {
                     video.playbackRate = speedData
                 } else {
@@ -98,7 +98,8 @@ function getVideoProgress() {
 }
 
 // 设置倍速html 和 样式
-function createHTML(){
+function createHTML() {
+    let video = document.getElementsByTagName('video')[0]
     var videoContral = `
     <div class="btnList">
 
@@ -108,7 +109,6 @@ function createHTML(){
         <div class="thre">3 倍速</div>
     </div>`
     $("body").append(videoContral)
-    let video = document.getElementsByTagName('video')[0]
     // 点击事件
     $('.one').click(()=>{
         video.playbackRate = 1
@@ -130,7 +130,7 @@ function createHTML(){
 function addStyle(){
     let css = `
     .btnList{
-        position: fixed;
+        position: absolute;
         right: 0px;
         top: 0px;
         z-index: 9999;

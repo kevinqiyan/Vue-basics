@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增练习</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .test video {
+        width: 600px;
+        height: 400px;
+    }
+    button{
+        width: 40px;
+        height: 20px;
+        cursor: pointer;
+    }
+    .btnList{
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 9999;
+        border: 1px solid #ccc;
+        height: 100px;
+        width: 100px;
+    }
+    .btnList p {
+        color: red;
+    }
+    .btnList div{
+        width: 100%;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        cursor: pointer;
+        background: #ccc;
+        margin-top: 5px;
+
+    }
+
+</style>
+<body>
+   
+    <div class="test">
+        <video src="https://vd2.bdstatic.com/mda-jdpk874wp2dyki1d/sc/mda-jdpk874wp2dyki1d.mp4?v_from_s=hkapp-haokan-hbf&auth_key=1670077267-0-0-1ab18674c340cf4d69d5dedeb7837f3b&bcevod_channel=searchbox_feed&pd=1&cd=0&pt=3&logid=3067491824&vid=1568738621745412096&abtest=106330_2-104960_1&klogid=3067491824"></video>
+    </div>
+<!-- 
+
+     <button class="palyBtn">播放</button>
+        <button class="pausedBtn">暂停</button>
+        <button class="mutedBtn">静音</button>
+ -->
+
+</body>
+<script src="../js/jquery.min.js"></script>
+<script>
+    
+    var video = document.getElementsByTagName('video')[0]
+    createHTML()
+    var speed = localStorage.getItem('Speed')
+        console.log('Speed',speed);
+    
+    let palyBtn = document.getElementsByClassName('palyBtn')
+    let pausedBtn = document.getElementsByClassName('pausedBtn')
+    let mutedBtn = document.getElementsByClassName('mutedBtn')
+    let one = document.getElementsByClassName('one')
+    let two = document.getElementsByClassName('two')
+    let thre = document.getElementsByClassName('thre')
+
+    function createHTML(){
+        var videoContral = `
+        <div class="btnList">
+            <p>设置播放速度</p>
+            <div class="one">1</div>
+            <div class="two">2</div>
+            <div class="thre">3</div>
+        </div>`
+        $("body").append(videoContral)
+    }
+    function addStyle(){
+        let css = `
+        .btnList{
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            z-index: 9999;
+            border: 1px solid #ccc;
+            height: 100px;
+            width: 100px;
+        }
+        .btnList p {
+            color: red;
+        }
+        .btnList div{
+            width: 100%;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+            background: #ccc;
+            margin-top: 5px;
+        }
+        `
+        GM_addStyle(css)
+    }
+
+    $('.palyBtn').click(()=>{
+        video.play()
+        
+        if (speed) {
+            video.playbackRate = speed
+        }
+
+    })
+    $('.pausedBtn').click(()=>{
+        video.pause()
+    })
+    $('.mutedBtn').click(()=>{
+       
+        if (video.muted) {
+            video.muted = false
+        } else {
+            video.muted = true
+        }
+         
+    })
+
+    $('.one').click(()=>{
+        video.playbackRate = 1
+        localStorage.setItem('Speed',1)
+    })
+
+    $('.two').click(()=>{
+        video.playbackRate = 2
+        localStorage.setItem('Speed',2)
+    })
+    $('.thre').click(()=>{
+        video.playbackRate = 3
+        localStorage.setItem('Speed',3)
+    })
+</script>
+</html>
