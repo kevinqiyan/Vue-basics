@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         青书学堂_自动播放
 // @namespace    guokwa.com
-// @version      0.3
+// @version      0.4
 // @description  青书学堂自动后台静音播放，章节跳过。
 // @author       七言
 // @match        *://*.qingshuxuetang.com/*
@@ -28,20 +28,20 @@
 
 // 获取浏览器参数
 function UrlSearch() {
-	var name, value;
-	var str = location.href; //取得整个地址栏
-	var num = str.indexOf("?")
-	str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
+    var name, value;
+    var str = location.href; //取得整个地址栏
+    var num = str.indexOf("?")
+    str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
 
-	var arr = str.split("&"); //各个参数放到数组里
-	for (var i = 0; i < arr.length; i++) {
-		num = arr[i].indexOf("=");
-		if (num > 0) {
-			name = arr[i].substring(0, num);
-			value = arr[i].substr(num + 1);
-			this[name] = value;
-		}
-	}
+    var arr = str.split("&"); //各个参数放到数组里
+    for (var i = 0; i < arr.length; i++) {
+        num = arr[i].indexOf("=");
+        if (num > 0) {
+            name = arr[i].substring(0, num);
+            value = arr[i].substr(num + 1);
+            this[name] = value;
+        }
+    }
 }
 
 
@@ -49,27 +49,29 @@ function UrlSearch() {
 function videoPlay(params) {
     let video = document.getElementsByTagName('video')[0]
     let currentTime = video.currentTime.toFixed(1)
-
-    if (!video || currentTime == 0.0) {
-        nexVideoUrl(video,params)
-    }
-    createHTML()
-    addStyle()
-    // 获取播放速度参数
-    let speedData = GM_getValue('Speed')
-    if (speedData) {
-        video.playbackRate = speedData
+    console.log('播放进度',currentTime);
+    if (!video.src) {
+        nexVideoUrl(video, params, false)
     } else {
-        video.playbackRate = 1 // 默认一倍速播放
+        createHTML()
+        addStyle()
+        // 获取播放速度参数
+        let speedData = GM_getValue('Speed')
+        if (speedData) {
+            video.playbackRate = speedData
+        } else {
+            video.playbackRate = 1 // 默认一倍速播放
+        }
+        video.muted = true // 静音播放
+        video.play()
+        nexVideoUrl(video, params, true)
     }
-    video.muted = true // 静音播放
-    video.play()
-    nexVideoUrl(video,params)
+
 
 }
 
 // 下一个视频播放链接
-function nexVideoUrl(video,params) {
+function nexVideoUrl(video, params, isVideo) {
     let { courseId, teachPlanId, periodId } = params
     let courseArr = params.nodeId.split('_')
 
@@ -78,7 +80,7 @@ function nexVideoUrl(video,params) {
     if (courseArr.length == 2) {
         nextKey = `kcjs_${Number(courseArr[1]) + 1}`
     } else if (courseArr.length == 3) {
-        if (!video) {
+        if (!isVideo) {
             nextKey = `kcjs_${Number(courseArr[1]) + 1}_${Number(1)}`
         } else {
             nextKey = `kcjs_${courseArr[1]}_${Number(courseArr[2]) + 1}`
@@ -86,7 +88,7 @@ function nexVideoUrl(video,params) {
     }
     const nextUrl = `https://${window.location.host}${window.location.pathname}?teachPlanId=${teachPlanId}&periodId=${periodId}&courseId=${courseId}&nodeId=${nextKey}`
 
-    if (!video) {
+    if (!isVideo) {
         location.replace(nextUrl)
     } else {
         video.addEventListener('ended', function () {
@@ -108,21 +110,21 @@ function createHTML() {
     </div>`
     $("body").append(videoContral)
     // 点击事件
-    $('.one').click(()=>{
+    $('.one').click(() => {
         video.playbackRate = 1
         GM_setValue('Speed', 1)
     })
 
-    $('.two').click(()=>{
+    $('.two').click(() => {
         video.playbackRate = 2
         GM_setValue('Speed', 2)
     })
-    $('.thre').click(()=>{
+    $('.thre').click(() => {
         video.playbackRate = 3
         GM_setValue('Speed', 3)
     })
 }
-function addStyle(){
+function addStyle() {
     let css = `
     .btnList{
         position: absolute;
