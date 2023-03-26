@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一次上传多个文件</title>
+</head>
+<body>
+    <div id="box">
+        <div class="upload">
+            <el-upload 
+            ref="upload" 
+            :limit="10" 
+            accept=".jpg,.gif,.png,.jpeg,.txt,.pdf,.doc,.docx,.xls,.xlsx" 
+            name="files" 
+            :multiple="true"
+            :action="action"
+            :headers="myToken" 
+            :on-change="handleFileChange"
+            :before-remove="handleFileRemove" 
+            :auto-upload="false"
+            :file-list="upload.fileList" 
+            >
+            <!-- <el-button slot="trigger" size="small" type="primary">选取文件</el-button> -->
+          </el-upload>
+          <el-button type="primary" @click="submitFileForm">确 定</el-button>
+        </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script>
+new Vue({
+    el: '#box',
+    data() {
+        return {
+            myToken: '',
+            action: '',
+            upload: {
+                fileList: [],
+                fileName: []
+            }
+        }
+    },
+    methods: {
+        handleFileChange(file,fileList){
+            console.log('改变',file,fileList);
+            this.upload.fileList = fileList
+        },
+        handleFileRemove(file,fileList){
+            console.log('remove',file,fileList);
+            this.upload.fileList = fileList
+        },
+        submitFileForm(){
+            let formData = new FormData()
+            this.upload.fileList.forEarch(file => {
+                formData.append('file',file.raw)
+                this.upload.fileName.push(file.name)
+            });
+            console.log('获取所有的文件', formData.getAll('file'));
+        }
+    },
+})
+</script>
+</html>
