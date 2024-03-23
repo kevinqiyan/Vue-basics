@@ -12,7 +12,7 @@ function add(num) {
 
     return fn
 }
-console.log(add(1)(2)(3)(4));
+console.log('sum',add(1)(2)(3)(4).toString())
 
 function myCurried(fn) {
     return function curry(...args1) {
@@ -30,7 +30,7 @@ function myCurried(fn) {
     return a + b + c + d + e
   }
   let resFunc = myCurried(sum)
-  // console.log(resFunc(1,3,4)(1)(23))
+  console.log('resFunc',resFunc(1,3,4)(1)(23))
   //解析:
   //1、这里的fn.length获取的是函数传入参数的长度
   //2、这里使用递归的思想

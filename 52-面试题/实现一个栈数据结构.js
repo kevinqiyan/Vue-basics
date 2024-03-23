@@ -43,4 +43,4 @@ stack.in('y')
 stack.in('z')
 
 // console.log('out',stack.top,'stack',stack);
-console.log('Stack',Stack.in);
+console.log('Stack',stack);

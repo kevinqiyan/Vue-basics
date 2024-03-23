@@ -1,11 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <button id="btn">函数节流</button>
 </body>
+
+<script>
+    let btn = document.getElementById('btn')
+
+    // 时间戳方案
+    function throttle(fn) {
+
+        var time = Date.now()
+        return function () {
+            var _this = this
+            var now =  Date.now()
+            if (now - time >= await) {
+                fn.apply(_this, arguments)
+                time = Date.now()
+            }
+        }
+    }
+
+    // 定时器方案
+    function throttle2(fn,await){
+        var time = null
+        return function(){
+            var context = this
+            var args = this
+            if(!time){
+                time = setTimeout(() => {
+                    fn.apply(context,args)
+                    time = null
+                }, await);
+            }
+        }
+    }
+
+
+
+    function sayHi() {
+        console.log('节流了')
+    }
+
+    btn.onclick = function () {
+        
+    }
+
+</script>
+
 </html>
